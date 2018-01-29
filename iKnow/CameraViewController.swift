@@ -14,7 +14,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     
     @IBOutlet weak var detailLabel: UILabel!
-    
     @IBOutlet weak var cameraView: SCNView!
     
     private var previewLayer: AVCaptureVideoPreviewLayer!
@@ -42,15 +41,10 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         captureSession.startRunning()
         
         //Set up the display layer on screen
-//        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        self.view.layer.a(previewLayer, at: 0)
-//        previewLayer.frame = self.view.frame
-//        previewLayer.frame = cameraView.bounds
-//        self.view.backgroundColor = .black
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        cameraView.layer.addSublayer(previewLayer)
-        previewLayer!.frame = cameraView.bounds
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        self.view.layer.addSublayer(previewLayer)
+        previewLayer.frame = cameraView.bounds
+        self.view.backgroundColor = .black
         
         //instantiate an "output" to be fed into capture session
         let dataOutput = AVCaptureVideoDataOutput()
@@ -67,7 +61,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-            let confidence = String(format: "%.2f", firstObservation.confidence*100)
+//            let confidence = String(format: "%.2f", firstObservation.confidence*100)
             
             print(firstObservation.identifier, firstObservation.confidence)
             

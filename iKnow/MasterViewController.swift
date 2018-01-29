@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 class MasterViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -28,7 +26,6 @@ class MasterViewController: UIViewController {
     
     func setupView() {
         setupSegmentedControl()
-        
         updateView()
     }
     
@@ -78,10 +75,10 @@ class MasterViewController: UIViewController {
         addChildViewController(viewController)
         
         // Add Child View as Subview
-        view.addSubview(viewController.view)
+        view.insertSubview(viewController.view, at: 0)
         
-        // Configure Child View
-        viewController.view.frame = view.bounds
+//        // Configure Child View
+//        viewController.view.frame = view.bounds
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Notify Child View Controller
@@ -97,6 +94,10 @@ class MasterViewController: UIViewController {
         
         // Notify Child View Controller
         viewController.removeFromParentViewController()
+    }
+    
+    @IBAction func layerChanged(_ sender: UISegmentedControl) {
+        updateView()
     }
     
     private func updateView() {
