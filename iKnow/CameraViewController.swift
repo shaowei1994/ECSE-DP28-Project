@@ -44,6 +44,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         self.view.layer.addSublayer(previewLayer)
         previewLayer.frame = cameraView.bounds
+//        previewLayer.frame = self.view.frame
         self.view.backgroundColor = .black
         
         //instantiate an "output" to be fed into capture session
@@ -61,12 +62,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-//            let confidence = String(format: "%.2f", firstObservation.confidence*100)
+            let confidence = String(format: "%.2f", firstObservation.confidence*100)
             
             print(firstObservation.identifier, firstObservation.confidence)
             
             DispatchQueue.main.async {
-//                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
+                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
             }
         }
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])

@@ -10,6 +10,7 @@ import UIKit
 
 class MasterViewController: UIViewController {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
@@ -35,6 +36,8 @@ class MasterViewController: UIViewController {
         segmentedControl.insertSegment(withTitle: "Camera", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 1, animated: false)
         segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
+        
+        self.view.bringSubview(toFront: segmentedControl)
         
         // Select First Segment
         segmentedControl.selectedSegmentIndex = 0
@@ -75,11 +78,11 @@ class MasterViewController: UIViewController {
         addChildViewController(viewController)
         
         // Add Child View as Subview
-        view.insertSubview(viewController.view, at: 0)
+        view.addSubview(viewController.view)
         
 //        // Configure Child View
-//        viewController.view.frame = view.bounds
-        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        viewController.view.frame = containerView.bounds
+//        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Notify Child View Controller
         viewController.didMove(toParentViewController: self)
@@ -97,6 +100,7 @@ class MasterViewController: UIViewController {
     }
     
     @IBAction func layerChanged(_ sender: UISegmentedControl) {
+        print(segmentedControl.selectedSegmentIndex)
         updateView()
     }
     
@@ -108,6 +112,7 @@ class MasterViewController: UIViewController {
             remove(asChildViewController: cameraViewController)
             add(asChildViewController: photoViewController)
         }
+         self.view.bringSubview(toFront: segmentedControl)
     }
     
 }

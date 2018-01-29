@@ -23,44 +23,43 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wzt-0o-Dsd">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <segue destination="XNd-Dp-ezG" kind="embed" id="8B9-9p-its"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVc-RN-MAT">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <segue destination="h7h-Va-6Zq" kind="embed" id="sQO-c4-UN0"/>
                                         </connections>
                                     </containerView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZnD-8s-vlh">
-                                        <rect key="frame" x="126" y="756" width="123" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="Camera"/>
-                                            <segment title="Image"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="layerChanged:" destination="Cft-Th-gDL" eventType="valueChanged" id="cEN-0d-qN4"/>
-                                            <action selector="segmentedControl:" destination="NPU-TW-Zcd" eventType="valueChanged" id="pQD-Aa-hSV"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SxF-Oc-a5x">
+                                <rect key="frame" x="127" y="751" width="121" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="layerChanged:" destination="Cft-Th-gDL" eventType="valueChanged" id="sKX-r4-fcl"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gtC-JO-XUr"/>
                     </view>
                     <connections>
-                        <outlet property="segmentedControl" destination="ZnD-8s-vlh" id="yvy-eJ-gQi"/>
+                        <outlet property="containerView" destination="UVc-RN-MAT" id="TPf-8h-HRw"/>
+                        <outlet property="segmentedControl" destination="SxF-Oc-a5x" id="qpT-kd-Tbu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3P-Dh-obk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NPU-TW-Zcd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="325.60000000000002" y="131.52709359605913"/>
         </scene>
@@ -125,14 +124,14 @@
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="XNd-Dp-ezG" customClass="CameraViewController" customModule="iKnow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Mt-5E-h1o">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAG-HC-Peq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </sceneKitView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj8-YD-oDN">
-                                <rect key="frame" x="166" y="44" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj8-YD-oDN">
+                                <rect key="frame" x="130" y="44" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -162,11 +161,11 @@
             <objects>
                 <viewController storyboardIdentifier="PhotoViewController" id="h7h-Va-6Zq" customClass="PhotoViewController" customModule="iKnow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9na-Uc-nOK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B0A-Ih-YjR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Photo Currently Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib1-C7-FFA">
                                 <rect key="frame" x="78" y="314" width="219" height="21"/>
