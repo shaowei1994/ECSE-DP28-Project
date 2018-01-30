@@ -9,18 +9,39 @@ import UIKit
 import AVKit
 import Vision
 import ARKit
+import SceneKit
 
-class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, ARSCNViewDelegate {
     
     
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var cameraView: SCNView!
+    @IBOutlet weak var cameraView: ARSCNView!
     
     private var previewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //==========================================================================================================================================
+        
+        //Set up the AR Session
+        cameraView.delegate = self
+        //Show FPS and other information
+//        cameraView.showsStatistics = true
+        let scene = SCNScene()
+        //Set the scene to the view
+        cameraView.scene = scene
+        cameraView.autoenablesDefaultLighting = true
+        
+        //==========================================================================================================================================
+        
+        //Tap - to tag the object
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
+//        view.addGestureRecognizer(tapGesture)
+        
+        //==========================================================================================================================================
         
         //instantiate a Capture Session
         let captureSession = AVCaptureSession()
@@ -42,9 +63,9 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         
         //Set up the display layer on screen
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+//        self.view.frame =
         self.view.layer.addSublayer(previewLayer)
-        previewLayer.frame = cameraView.bounds
-//        previewLayer.frame = self.view.frame
+        previewLayer.frame = cameraView.frame
         self.view.backgroundColor = .black
         
         //instantiate an "output" to be fed into capture session
@@ -77,4 +98,25 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.planeDetection = .horizontal
+//        cameraView.session.run(configuration)
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        cameraView.session.pause()
+//
+//    }
+//
+//    func renderer(_ render: SCNSceneRenderer, updateAtTime time: TimeInterval){
+//        DispatchQueue.main.async {
+//            //add any updates to the SceneKit here.
+//        }
+//    }
+//
 }

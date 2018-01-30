@@ -13,6 +13,7 @@ import ImageIO
 
 class PhotoViewController: UIViewController {
 
+    @IBOutlet weak var noPhotoSelected: UILabel!
     @IBOutlet weak var classificationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -47,8 +48,8 @@ class PhotoViewController: UIViewController {
              To use a different Core ML classifier model, add it to the project
              and replace `MobileNet` with that model's generated Swift class.
              */
-            presentPhotoPicker(sourceType: .photoLibrary)
 
+            noPhotoSelected.text = ""
             let model = try VNCoreMLModel(for: Caltech().model)
             
             let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
@@ -103,35 +104,34 @@ class PhotoViewController: UIViewController {
                     // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
                     return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
-                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+                self.classificationLabel.text = descriptions.joined(separator: "\n")
             }
         }
     }
     
     // MARK: - Photo Actions
     
-//    @IBAction func takePicture() {
-//        // Show options for the source picker only if the camera is available.
-////        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-//
-////            return
-////        }
-//
-//        presentPhotoPicker(sourceType: .photoLibrary)
-//
-////        let photoSourcePicker = UIAlertController()
-////        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
-////            self.presentPhotoPicker(sourceType: .camera)
-////        }
-////        let choosePhoto = UIAlertAction(title: "Choose Photo", style: .default) { [unowned self] _ in
-////            self.presentPhotoPicker(sourceType: .photoLibrary)
-////        }
-////        photoSourcePicker.addAction(takePhoto)
-////        photoSourcePicker.addAction(choosePhoto)
-////        photoSourcePicker.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-////        present(photoSourcePicker, animated: true)
-//    }
+    @IBAction func takePicture() {
+        // Show options for the source picker only if the camera is available.
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            presentPhotoPicker(sourceType: .photoLibrary)
+            return
+        }
+        
+        let photoSourcePicker = UIAlertController()
+        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { [unowned self] _ in
+            self.presentPhotoPicker(sourceType: .camera)
+        }
+        let choosePhoto = UIAlertAction(title: "Choose Photo", style: .default) { [unowned self] _ in
+            self.presentPhotoPicker(sourceType: .photoLibrary)
+        }
+        
+        photoSourcePicker.addAction(takePhoto)
+        photoSourcePicker.addAction(choosePhoto)
+        photoSourcePicker.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(photoSourcePicker, animated: true)
+    }
     
     func presentPhotoPicker(sourceType: UIImagePickerControllerSourceType) {
         let picker = UIImagePickerController()
@@ -152,5 +152,4 @@ extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationCont
         imageView.image = image
         updateClassifications(for: image)
     }
-
 }
