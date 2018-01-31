@@ -34,6 +34,14 @@
                                             <segue destination="h7h-Va-6Zq" kind="embed" id="sQO-c4-UN0"/>
                                         </connections>
                                     </containerView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hJ-0S-6id">
+                                        <rect key="frame" x="266" y="750" width="84" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Settings"/>
+                                        <connections>
+                                            <segue destination="XsI-vk-NLy" kind="presentation" id="HfJ-4K-p7L"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -48,13 +56,13 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SxF-Oc-a5x">
-                                <rect key="frame" x="127.66666666666669" y="750" width="121" height="29"/>
+                                <rect key="frame" x="127" y="750" width="121" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
                                 </segments>
                                 <connections>
-                                    <action selector="layerChanged:" destination="Cft-Th-gDL" eventType="valueChanged" id="sKX-r4-fcl"/>
+                                    <action selector="layerChanged:" destination="Cft-Th-gDL" eventType="valueChanged" id="WMY-6C-PSm"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -72,6 +80,7 @@
                     <connections>
                         <outlet property="containerView" destination="UVc-RN-MAT" id="TPf-8h-HRw"/>
                         <outlet property="segmentedControl" destination="SxF-Oc-a5x" id="qpT-kd-Tbu"/>
+                        <outlet property="settingsBtn" destination="4hJ-0S-6id" id="sPP-eq-9lK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3P-Dh-obk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +162,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bI3-wa-SvZ">
-                                            <rect key="frame" x="96" y="13" width="48" height="24"/>
+                                            <rect key="frame" x="0.0" y="13" width="240" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -195,7 +204,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Photo Currently Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib1-C7-FFA">
-                                <rect key="frame" x="65" y="394" width="246" height="24"/>
+                                <rect key="frame" x="65.333333333333314" y="394.33333333333331" width="246" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

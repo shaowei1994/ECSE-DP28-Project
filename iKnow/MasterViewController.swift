@@ -10,6 +10,7 @@ import UIKit
 
 class MasterViewController: UIViewController {
     
+    @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -34,10 +35,9 @@ class MasterViewController: UIViewController {
         segmentedControl.removeAllSegments()
         segmentedControl.insertSegment(withTitle: "Camera", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 1, animated: false)
-        segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
+//        segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
         
         self.view.bringSubview(toFront: segmentedControl)
-        
         // Select First Segment
         segmentedControl.selectedSegmentIndex = 0
     }
@@ -80,7 +80,7 @@ class MasterViewController: UIViewController {
         view.addSubview(viewController.view)
         
 //        // Configure Child View
-        viewController.view.frame = containerView.bounds
+//        viewController.view.frame = containerView.bounds
 //        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Notify Child View Controller
@@ -111,7 +111,9 @@ class MasterViewController: UIViewController {
             remove(asChildViewController: cameraViewController)
             add(asChildViewController: photoViewController)
         }
-         self.view.bringSubview(toFront: segmentedControl)
+        self.view.bringSubview(toFront: segmentedControl)
+        self.view.addSubview(settingsBtn)
+
     }
     
 }
