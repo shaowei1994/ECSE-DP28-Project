@@ -17,7 +17,8 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        setupView()
+        setupSegmentedControl()
+        updateView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -25,27 +26,17 @@ class MasterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupView() {
-        setupSegmentedControl()
-        updateView()
-    }
-    
     private func setupSegmentedControl() {
         // Configure Segmented Control
         segmentedControl.removeAllSegments()
         segmentedControl.insertSegment(withTitle: "Camera", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 1, animated: false)
-//        segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
-        
-        self.view.bringSubview(toFront: segmentedControl)
+
         // Select First Segment
         segmentedControl.selectedSegmentIndex = 0
+        self.view.addSubview(settingsBtn)
     }
-    
-    @objc func selectionDidChange(_ sender: UISegmentedControl) {
-        updateView()
-    }
-    
+
     private lazy var cameraViewController: CameraViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -53,8 +44,8 @@ class MasterViewController: UIViewController {
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
         
-        // Add View Controller as Child View Controller
-        self.add(asChildViewController: viewController)
+//        // Add View Controller as Child View Controller
+//        self.add(asChildViewController: viewController)
         
         return viewController
     }()
@@ -62,12 +53,12 @@ class MasterViewController: UIViewController {
     private lazy var photoViewController: PhotoViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
+    
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
         
-        // Add View Controller as Child View Controller
-        self.add(asChildViewController: viewController)
+//        // Add View Controller as Child View Controller
+//        self.add(asChildViewController: viewController)
         
         return viewController
     }()
@@ -78,10 +69,6 @@ class MasterViewController: UIViewController {
         
         // Add Child View as Subview
         view.addSubview(viewController.view)
-        
-//        // Configure Child View
-//        viewController.view.frame = containerView.bounds
-//        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Notify Child View Controller
         viewController.didMove(toParentViewController: self)
@@ -96,6 +83,7 @@ class MasterViewController: UIViewController {
         
         // Notify Child View Controller
         viewController.removeFromParentViewController()
+        
     }
     
     @IBAction func layerChanged(_ sender: UISegmentedControl) {
@@ -103,17 +91,32 @@ class MasterViewController: UIViewController {
         updateView()
     }
     
+    private func removeAll(parentViewController parentView: UIViewController){
+        if parentView.childViewControllers.count > 0{
+            let viewControllers:[UIViewController] = parentView.childViewControllers
+            for viewContoller in viewControllers{
+                viewContoller.willMove(toParentViewController: nil)
+                viewContoller.view.removeFromSuperview()
+                viewContoller.removeFromParentViewController()
+            }
+        }
+    }
+    
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
-            remove(asChildViewController: photoViewController)
+//            remove(asChildViewController: cameraViewController)
+
+            removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
         } else {
-            remove(asChildViewController: cameraViewController)
+//            remove(asChildViewController: cameraViewController)
+            removeAll(parentViewController: self)
             add(asChildViewController: photoViewController)
         }
+        
+        //Bring the buttons to the front layer everytime the mode(layer) changes
         self.view.bringSubview(toFront: segmentedControl)
-        self.view.addSubview(settingsBtn)
-
+        self.view.bringSubview(toFront: settingsBtn)
     }
     
 }
