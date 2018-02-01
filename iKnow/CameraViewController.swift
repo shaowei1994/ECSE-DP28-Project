@@ -61,12 +61,15 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         captureSession.addInput(input)
         captureSession.startRunning()
         
+        
+        
         //Set up the display layer on screen
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        self.view.frame =
         self.view.layer.addSublayer(previewLayer)
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         previewLayer.frame = cameraView.frame
         self.view.backgroundColor = .black
+        self.view.addSubview(detailLabel)
         
         //instantiate an "output" to be fed into capture session
         let dataOutput = AVCaptureVideoDataOutput()

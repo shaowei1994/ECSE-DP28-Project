@@ -91,6 +91,7 @@ class MasterViewController: UIViewController {
         updateView()
     }
     
+    //Remove all layers within the parent view controller
     private func removeAll(parentViewController parentView: UIViewController){
         if parentView.childViewControllers.count > 0{
             let viewControllers:[UIViewController] = parentView.childViewControllers
