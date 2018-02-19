@@ -88,10 +88,34 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             guard let firstObservation = results.first else {return}
             let confidence = String(format: "%.2f", firstObservation.confidence*100)
             
-            print(firstObservation.identifier, firstObservation.confidence)
-            
+            print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
+
+//============================================================================================================================================
+            var madarinCode = [
+                "laptop" : "笔记本电脑"
+            ]
+            //change this string to the one that u obtain from the model
+            let message = firstObservation.identifier.split(separator: ",")[0]
+            var encodedMessage = ""
+            //Split message String into words seperated by space(" ")
+            let array = message.split(separator: " ")
+            for singleWord in array {
+                let word = String(singleWord)
+                if let encodedWord = madarinCode[word] {
+                    // word
+                    encodedMessage += encodedWord
+                } else {
+                    // word not found in the map
+                    encodedMessage += word
+                }
+                // seperate each word with a space
+                encodedMessage += " "
+            }
+//============================================================================================================================================
+
             DispatchQueue.main.async {
-                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
+//                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
+                self.detailLabel.text = encodedMessage
             }
         }
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])

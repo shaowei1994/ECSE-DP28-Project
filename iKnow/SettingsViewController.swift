@@ -10,9 +10,48 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
+    let cellHeight: CGFloat = 50
+    let fontSize: CGFloat = 35
+    
+    let sections: [String] = [
+        "Languages",
+        "About"
+    ]
+    
+    var languages: [Language] = [
+        Language(symbol: "🇨🇦", name: "Canadian English"),
+        Language(symbol: "🇨🇳", name: "Simplified Chinese"),
+        Language(symbol: "🇹🇼", name: "Traditional Chinese"),
+        Language(symbol: "🇯🇵", name: "Japanese"),
+        Language(symbol: "🇫🇷", name: "French")
+    ]
+    
+    let abouts: [String]  = [
+        "Version",
+        "Build"
+    ]
+    
+
+    
+    class Language{
+        var symbol: String
+        var name: String
+        
+        init(symbol: String, name: String){
+            self.symbol = symbol
+            self.name = name
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        navigationItem.rightBarButtonItem = editButtonItem
+        tableView.rowHeight = cellHeight
+    }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem){
+        let tableViewEditingMode = tableView.isEditing
+        tableView.setEditing(!tableViewEditingMode, animated: true)
     }
 
     // MARK: - Table view data source
@@ -23,23 +62,38 @@ class SettingsViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if section == 0 {
+            return languages.count
+        }else{
+            return abouts.count
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
+        let language = languages[indexPath.row]
+        cell.textLabel?.text = "\(language.symbol) - \(language.name)"
+        cell.textLabel?.font = UIFont(name:"Avenir", size:22)
+        cell.showsReorderControl = true
 
         return cell
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        tableView.reloadData()
+    }
+    
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        let movedLanguageCell = languages.remove(at: fromIndexPath.row)
+        languages.insert(movedLanguageCell, at: to.row)
+    }
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -49,24 +103,17 @@ class SettingsViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        languages.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
     }
-    */
+    
 
     /*
     // Override to support conditional rearranging of the table view.

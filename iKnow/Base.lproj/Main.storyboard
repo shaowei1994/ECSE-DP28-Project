@@ -96,12 +96,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Z9B-WA-F4O">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LanguageCell" textLabel="3jR-Ov-t4F" rowHeight="85" style="IBUITableViewCellStyleDefault" id="Z9B-WA-F4O">
+                                <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z9B-WA-F4O" id="z9D-FT-GOT">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3jR-Ov-t4F">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="84.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -111,15 +120,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="dGe-rX-xq3">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="xKL-wb-VkY">
+                            <connections>
+                                <action selector="didSelectDoneButton:" destination="RKu-OO-YoH" id="0Gg-fV-ocD"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" style="plain" id="neM-D7-gyk">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fc4-Fd-6bp">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="didSelectDoneButton:" destination="RKu-OO-YoH" eventType="touchUpInside" id="K1e-0W-hCr"/>
-                                </connections>
+                                <state key="normal" title="Edit"/>
                             </button>
+                            <connections>
+                                <action selector="editButtonTapped:" destination="RKu-OO-YoH" id="PZZ-43-aGe"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
