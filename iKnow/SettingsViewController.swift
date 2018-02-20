@@ -75,12 +75,27 @@ class SettingsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
-        let language = languages[indexPath.row]
-        cell.textLabel?.text = "\(language.symbol) - \(language.name)"
+//        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
+//        let language = languages[indexPath.row]
+//        cell.textLabel?.text = "\(language.symbol) - \(language.name)"
+//        cell.textLabel?.font = UIFont(name:"Avenir", size:22)
+//        cell.showsReorderControl = true
+//
+//        return cell
+        
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
+        switch (indexPath.section) {
+        case 0:
+            let language = languages[indexPath.row]
+            cell.textLabel?.text = "\(language.symbol) - \(language.name)"
+        default:
+            let about = abouts[indexPath.row]
+            cell.textLabel?.text = "\(about)"
+        }
+        
         cell.textLabel?.font = UIFont(name:"Avenir", size:22)
         cell.showsReorderControl = true
-
+        
         return cell
     }
     
