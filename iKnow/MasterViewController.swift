@@ -43,10 +43,7 @@ class MasterViewController: UIViewController {
         
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
-        
-//        // Add View Controller as Child View Controller
-//        self.add(asChildViewController: viewController)
-        
+
         return viewController
     }()
     
@@ -56,10 +53,7 @@ class MasterViewController: UIViewController {
     
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
-        
-//        // Add View Controller as Child View Controller
-//        self.add(asChildViewController: viewController)
-        
+
         return viewController
     }()
     
@@ -105,12 +99,9 @@ class MasterViewController: UIViewController {
     
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
-//            remove(asChildViewController: cameraViewController)
-
             removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
         } else {
-//            remove(asChildViewController: cameraViewController)
             removeAll(parentViewController: self)
             add(asChildViewController: photoViewController)
         }

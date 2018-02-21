@@ -13,7 +13,6 @@ import SceneKit
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, ARSCNViewDelegate {
     
-    
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var cameraView: ARSCNView!
     
@@ -22,27 +21,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
-        //==========================================================================================================================================
-        
-        //Set up the AR Session
-        cameraView.delegate = self
-        //Show FPS and other information
-//        cameraView.showsStatistics = true
-        let scene = SCNScene()
-        //Set the scene to the view
-        cameraView.scene = scene
-        cameraView.autoenablesDefaultLighting = true
-        
-        //==========================================================================================================================================
-        
-        //Tap - to tag the object
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
-//        view.addGestureRecognizer(tapGesture)
-        
-        //==========================================================================================================================================
-        
+
         //instantiate a Capture Session
         let captureSession = AVCaptureSession()
         
@@ -60,8 +39,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
         captureSession.addInput(input)
         captureSession.startRunning()
-        
-        
         
         //Set up the display layer on screen
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -86,11 +63,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-            let confidence = String(format: "%.2f", firstObservation.confidence*100)
+//            let confidence = String(format: "%.2f", firstObservation.confidence*100)
             
             print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
 
-//============================================================================================================================================
+//===============================================================================================
+// Hash Map Method for Language Translation:
             var madarinCode = [
                 "laptop" : "笔记本电脑"
             ]
@@ -111,10 +89,9 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 // seperate each word with a space
                 encodedMessage += " "
             }
-//============================================================================================================================================
+//===================================================================================================
 
             DispatchQueue.main.async {
-//                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
                 self.detailLabel.text = encodedMessage
             }
         }
@@ -125,25 +102,4 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        let configuration = ARWorldTrackingConfiguration()
-//        configuration.planeDetection = .horizontal
-//        cameraView.session.run(configuration)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        cameraView.session.pause()
-//
-//    }
-//
-//    func renderer(_ render: SCNSceneRenderer, updateAtTime time: TimeInterval){
-//        DispatchQueue.main.async {
-//            //add any updates to the SceneKit here.
-//        }
-//    }
-//
 }
