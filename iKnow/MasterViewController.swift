@@ -44,9 +44,6 @@ class MasterViewController: UIViewController {
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
         
-//        // Add View Controller as Child View Controller
-//        self.add(asChildViewController: viewController)
-        
         return viewController
     }()
     
@@ -56,10 +53,6 @@ class MasterViewController: UIViewController {
     
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
-        
-//        // Add View Controller as Child View Controller
-//        self.add(asChildViewController: viewController)
-        
         return viewController
     }()
     
@@ -87,7 +80,12 @@ class MasterViewController: UIViewController {
     }
     
     @IBAction func layerChanged(_ sender: UISegmentedControl) {
-        print(segmentedControl.selectedSegmentIndex)
+        switch segmentedControl.selectedSegmentIndex{
+        case 0:
+            print("Camera View Active")
+        default:
+            print("Photo View Active")
+        }
         updateView()
     }
     
@@ -106,7 +104,6 @@ class MasterViewController: UIViewController {
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
 //            remove(asChildViewController: cameraViewController)
-
             removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
         } else {
@@ -118,6 +115,10 @@ class MasterViewController: UIViewController {
         //Bring the buttons to the front layer everytime the mode(layer) changes
         self.view.bringSubview(toFront: segmentedControl)
         self.view.bringSubview(toFront: settingsBtn)
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return true
     }
     
 }

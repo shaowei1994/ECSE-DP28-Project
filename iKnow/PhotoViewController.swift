@@ -139,7 +139,13 @@ class PhotoViewController: UIViewController {
         picker.sourceType = sourceType
         present(picker, animated: true)
     }
+    
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
 }
+
+
 
 extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // MARK: - Handling Image Picker Selection
