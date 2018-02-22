@@ -9,70 +9,36 @@ import UIKit
 import AVKit
 import Vision
 import ARKit
-import SceneKit
+import SpriteKit
 
-class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, ARSCNViewDelegate {
+class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegate {
     
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var cameraView: ARSCNView!
-    private var previewLayer: AVCaptureVideoPreviewLayer!
-    let dispatchQueueML = DispatchQueue(label: "com.hw.dispatchqueueml") // A Serial Queue
+    @IBOutlet weak var cameraView: ARSKView!
+    private var currentBuffer: CVPixelBuffer?
+    private let visionQueue = DispatchQueue(label: "Queue") // A Serial Queue
     var suspended = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        //===================================================================================
         
         //Set up the AR Session
+        let scene = SKScene()
+        scene.scaleMode = .aspectFill
         cameraView.delegate = self
-        let scene = SCNScene()
         //Set the scene to the view
-        cameraView.scene = scene
-        cameraView.autoenablesDefaultLighting = true
+        cameraView.presentScene(scene)
+        cameraView.session.delegate = self
         loopProcess()
-        
-        //        //instantiate a Capture Session
-        //        let captureSession = AVCaptureSession()
-        //
-        //        //instantiate a Capturing Device
-        //        guard let captureDevice = AVCaptureDevice.default(for: .video) else {return}
-        //
-        //        //enable auto-focus mode
-        //        if captureDevice.isFocusModeSupported(.continuousAutoFocus){
-        //            try! captureDevice.lockForConfiguration()
-        //            captureDevice.focusMode = .continuousAutoFocus
-        //            captureDevice.unlockForConfiguration()
-        //        }
-        //
-        //        //instantiate the camera as a capture input for the capture session
-        //        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
-        //        captureSession.addInput(input)
-        //        captureSession.startRunning()
-        //
-        //        //Set up the display layer on screen
-        //        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        //        self.view.layer.addSublayer(previewLayer)
-        //        previewLayer.frame = cameraView.frame
-        //        previewLayer.videoGravity = AVLayerVideoGravity.resize
-        //        self.view.backgroundColor = .black
-        //        self.view.addSubview(detailLabel)
-        //
-        //        //instantiate an "output" to be fed into capture session
-        //        let dataOutput = AVCaptureVideoDataOutput()
-        //        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Queue"))
-        //        captureSession.addOutput(dataOutput)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("View Appeared")
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         cameraView.session.run(configuration)
         if suspended == true{
-            dispatchQueueML.resume()
+            visionQueue.resume()
             suspended = false
         }
     }
@@ -80,17 +46,13 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         cameraView.session.pause()
-        dispatchQueueML.suspend()
+        visionQueue.suspend()
         suspended = true
-        print("View disappeared")
     }
     
     func loopProcess() {
-        // Continuously run CoreML whenever it's ready. (Preventing 'hiccups' in Frame Rate)
-        dispatchQueueML.async {
-            // 1. Run Update.
+        visionQueue.async {
             self.objectRecognition()
-            // 2. Loop this function.
             self.loopProcess()
         }
     }
@@ -102,54 +64,24 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-            //            let confidence = String(format: "%.2f", firstObservation.confidence*100)
+            let confidence = firstObservation.confidence
             DispatchQueue.main.async {
-                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0])
+                if confidence < 0.5 {
+                    self.detailLabel.text = "Unable to identify current object"
+                }else{
+                    self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0])
+                }
                 print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
             }
         }
+        // Crop input images to square area at center, matching the way the ML model was trained.
+        request.imageCropAndScaleOption = .centerCrop
+        
+        // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
+        request.usesCPUOnly = true
         try? VNImageRequestHandler(ciImage: ciImage, options: [:]).perform([request])
     }
-    
-    //    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-    //        guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
-    //        guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {return}
-    //        let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
-    //            guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
-    //            guard let firstObservation = results.first else {return}
-    ////            let confidence = String(format: "%.2f", firstObservation.confidence*100)
-    ////            print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
-    ////========================================================================================================
-    //            var madarinCode = [
-    //                "laptop" : "笔记本电脑"
-    //            ]
-    //            //change this string to the one that u obtain from the model
-    //            let message = firstObservation.identifier.split(separator: ",")[0]
-    //            var encodedMessage = ""
-    //            //Split message String into words seperated by space(" ")
-    //            let array = message.split(separator: " ")
-    //            for singleWord in array {
-    //                let word = String(singleWord)
-    //                if let encodedWord = madarinCode[word] {
-    //                    // word
-    //                    encodedMessage += encodedWord
-    //                } else {
-    //                    // word not found in the map
-    //                    encodedMessage += word
-    //                }
-    //                // seperate each word with a space
-    //                encodedMessage += " "
-    //            }
-    ////===========================================================================================================
-    //            DispatchQueue.main.async {
-    ////                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0]) + " " + confidence + "%"
-    //                self.detailLabel.text = encodedMessage
-    //                print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
-    //            }
-    //        }
-    //        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
-    //    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -165,11 +165,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zv-6u-fEA">
+                            <arskView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0S-CD-P6r">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                            </arscnView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bI3-wa-SvZ">
-                                <rect key="frame" x="0.0" y="135" width="375" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arskView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5K-lJ-0kX">
+                                <rect key="frame" x="0.0" y="69" width="375" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -177,17 +178,11 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="8Zv-6u-fEA" firstAttribute="leading" secondItem="D0S-Yg-cU1" secondAttribute="leading" id="JhR-KN-ts3"/>
-                            <constraint firstAttribute="bottom" secondItem="8Zv-6u-fEA" secondAttribute="bottom" id="Yt5-Lk-Znk"/>
-                            <constraint firstItem="8Zv-6u-fEA" firstAttribute="top" secondItem="7Mt-5E-h1o" secondAttribute="top" id="Zec-Qm-pfc"/>
-                            <constraint firstItem="8Zv-6u-fEA" firstAttribute="trailing" secondItem="D0S-Yg-cU1" secondAttribute="trailing" id="zHJ-vM-Y3E"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="D0S-Yg-cU1"/>
                     </view>
                     <connections>
-                        <outlet property="cameraView" destination="8Zv-6u-fEA" id="swZ-VV-R0j"/>
-                        <outlet property="detailLabel" destination="bI3-wa-SvZ" id="Bkg-ig-g8S"/>
+                        <outlet property="cameraView" destination="d0S-CD-P6r" id="tpo-cJ-4zr"/>
+                        <outlet property="detailLabel" destination="O5K-lJ-0kX" id="4Gl-Xt-8yT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgR-Ba-mvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
