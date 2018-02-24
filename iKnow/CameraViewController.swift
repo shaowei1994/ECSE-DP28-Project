@@ -6,7 +6,6 @@
 //  Copyright © 2018 Shao-Wei Liang. All rights reserved.
 //
 import UIKit
-import AVKit
 import Vision
 import ARKit
 import SpriteKit
@@ -17,12 +16,12 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     @IBOutlet weak var cameraView: ARSKView!
     private var currentBuffer: CVPixelBuffer?
     private let visionQueue = DispatchQueue(label: "Queue") // A Serial Queue
-    var suspended = false
+    private var suspended = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Set up the AR Session
+        //Set up the SKScene to render the view
         let scene = SKScene()
         scene.scaleMode = .aspectFill
         cameraView.delegate = self
@@ -34,9 +33,16 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        cameraView.session.run(configuration)
+        //Check if ARWorldTrackingConfiguration is supported in the device used
+        if ARWorldTrackingConfiguration.isSupported{
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.planeDetection = .horizontal
+            cameraView.session.run(configuration)
+        }else{
+            let configuration = AROrientationTrackingConfiguration()
+            cameraView.session.run(configuration)
+        }
+        
         if suspended == true{
             visionQueue.resume()
             suspended = false
@@ -64,13 +70,9 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-            let confidence = firstObservation.confidence
+//            let confidence = firstObservation.confidence
             DispatchQueue.main.async {
-                if confidence < 0.5 {
-                    self.detailLabel.text = "Unable to identify current object"
-                }else{
-                    self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0])
-                }
+                self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0])
                 print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
             }
         }
@@ -85,7 +87,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
     }
     
     override var prefersStatusBarHidden : Bool {
