@@ -62,10 +62,8 @@ class PhotoViewController: UIViewController {
         }
     }()
     
-    /// - Tag: PerformRequests
     func updateClassifications(for image: UIImage) {
         classificationLabel.text = "Classifying..."
-        
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
         
@@ -85,7 +83,6 @@ class PhotoViewController: UIViewController {
     }
     
     /// Updates the UI with the results of the classification.
-    /// - Tag: ProcessClassifications
     func processClassifications(for request: VNRequest, error: Error?) {
         DispatchQueue.main.async {
             guard let results = request.results else {
@@ -108,8 +105,6 @@ class PhotoViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Photo Actions
     
     @IBAction func takePicture() {
         // Show options for the source picker only if the camera is available.
@@ -144,7 +139,6 @@ class PhotoViewController: UIViewController {
         return true
     }
 }
-
 
 
 extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
