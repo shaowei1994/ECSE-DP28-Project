@@ -24,7 +24,10 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         //Set up the SKScene to render the view
         let scene = SKScene()
         scene.scaleMode = .aspectFill
+        
+        //Set the View's delegate
         cameraView.delegate = self
+        
         //Set the scene to the view
         cameraView.presentScene(scene)
         cameraView.session.delegate = self
