@@ -97,6 +97,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
             }
             DispatchQueue.main.async {
                 self.detailLabel.text = encodedMessage
+                print(encodedMessage)
             }
         }
         // Crop input images to square area at center, matching the way the ML model was trained.
@@ -110,10 +111,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override var prefersStatusBarHidden : Bool {
-        return true
     }
     
     //    func renderer(_ render: SCNSceneRenderer, updateAtTime time: TimeInterval){

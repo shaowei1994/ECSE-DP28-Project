@@ -111,4 +111,8 @@ class MasterViewController: UIViewController {
         self.view.bringSubview(toFront: settingsBtn)
     }
     
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
+    
 }
