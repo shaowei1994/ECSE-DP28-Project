@@ -6,69 +6,75 @@
 //  Copyright © 2018 Shao-Wei Liang. All rights reserved.
 //
 import UIKit
-import AVKit
 import Vision
 import ARKit
-import SceneKit
+import SpriteKit
 
-class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, ARSCNViewDelegate {
+class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegate {
     
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var cameraView: ARSCNView!
-    
-    private var previewLayer: AVCaptureVideoPreviewLayer!
+    @IBOutlet weak var cameraView: ARSKView!
+    private var currentBuffer: CVPixelBuffer?
+    private let visionQueue = DispatchQueue(label: "Queue") // A Serial Queue
+    private var suspended = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
-        //instantiate a Capture Session
-        let captureSession = AVCaptureSession()
         
-        //instantiate a Capturing Device
-        guard let captureDevice = AVCaptureDevice.default(for: .video) else {return}
+        //Set up the SKScene to render the view
+        let scene = SKScene()
+        scene.scaleMode = .aspectFill
         
-        //enable auto-focus mode
-        if captureDevice.isFocusModeSupported(.continuousAutoFocus){
-            try! captureDevice.lockForConfiguration()
-            captureDevice.focusMode = .continuousAutoFocus
-            captureDevice.unlockForConfiguration()
-        }
+        //Set the View's delegate
+        cameraView.delegate = self
         
-        //instantiate the camera as a capture input for the capture session
-        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
-        captureSession.addInput(input)
-        captureSession.startRunning()
-        
-        //Set up the display layer on screen
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        self.view.layer.addSublayer(previewLayer)
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        previewLayer.frame = cameraView.frame
-        self.view.backgroundColor = .black
-        self.view.addSubview(detailLabel)
-        
-        //instantiate an "output" to be fed into capture session
-        let dataOutput = AVCaptureVideoDataOutput()
-        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Queue"))
-        captureSession.addOutput(dataOutput)
+        //Set the scene to the view
+        cameraView.presentScene(scene)
+        cameraView.session.delegate = self
+        loopProcess()
     }
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Check if ARWorldTrackingConfiguration is supported in the device used
+        if ARWorldTrackingConfiguration.isSupported{
+            let configuration = ARWorldTrackingConfiguration()
+            configuration.planeDetection = .horizontal
+            cameraView.session.run(configuration)
+        }else{
+            let configuration = AROrientationTrackingConfiguration()
+            cameraView.session.run(configuration)
+        }
         
-        guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
+        if suspended == true{
+            visionQueue.resume()
+            suspended = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        cameraView.session.pause()
+        visionQueue.suspend()
+        suspended = true
+    }
+    
+    func loopProcess() {
+        visionQueue.async {
+            self.objectRecognition()
+            self.loopProcess()
+        }
+    }
+    
+    func objectRecognition(){
+        guard let pixelBuffer: CVPixelBuffer = cameraView.session.currentFrame?.capturedImage else {return}
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {return}
-        
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
-            
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-//            let confidence = String(format: "%.2f", firstObservation.confidence*100)
-            
-            print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
-
-//===============================================================================================
-// Hash Map Method for Language Translation:
+//            let confidence = firstObservation.confidence
+            // Hash Map Method for Language Translation:
             var madarinCode = [
                 "laptop" : "笔记本电脑"
             ]
@@ -89,17 +95,31 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 // seperate each word with a space
                 encodedMessage += " "
             }
-//===================================================================================================
-
             DispatchQueue.main.async {
                 self.detailLabel.text = encodedMessage
             }
         }
-        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+        // Crop input images to square area at center, matching the way the ML model was trained.
+        request.imageCropAndScaleOption = .centerCrop
+        
+        // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
+        request.usesCPUOnly = true
+        try? VNImageRequestHandler(ciImage: ciImage, options: [:]).perform([request])
     }
-  
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
+    
+    //    func renderer(_ render: SCNSceneRenderer, updateAtTime time: TimeInterval){
+    //        DispatchQueue.main.async {
+    //            //add any updates to the SceneKit here.
+    //        }
+    //    }
 }
+
