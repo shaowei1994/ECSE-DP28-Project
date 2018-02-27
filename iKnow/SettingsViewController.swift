@@ -30,9 +30,7 @@ class SettingsViewController: UITableViewController {
         "Version",
         "Build"
     ]
-    
 
-    
     class Language{
         var symbol: String
         var name: String
@@ -75,14 +73,6 @@ class SettingsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
-//        let language = languages[indexPath.row]
-//        cell.textLabel?.text = "\(language.symbol) - \(language.name)"
-//        cell.textLabel?.font = UIFont(name:"Avenir", size:22)
-//        cell.showsReorderControl = true
-//
-//        return cell
-        
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
         switch (indexPath.section) {
         case 0:
@@ -91,6 +81,7 @@ class SettingsViewController: UITableViewController {
         default:
             let about = abouts[indexPath.row]
             cell.textLabel?.text = "\(about)"
+            cell.isUserInteractionEnabled = false
         }
         
         cell.textLabel?.font = UIFont(name:"Avenir", size:22)
@@ -99,25 +90,22 @@ class SettingsViewController: UITableViewController {
         return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-//        tableView.reloadData()
-    }
-    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let movedLanguageCell = languages.remove(at: fromIndexPath.row)
         languages.insert(movedLanguageCell, at: to.row)
     }
 
-
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        switch (indexPath.section) {
+        case 0:
+            return true
+        default:
+            return false
+        }
     }
-    */
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -129,6 +117,21 @@ class SettingsViewController: UITableViewController {
         return sections[section]
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       
+    }
 
     /*
     // Override to support conditional rearranging of the table view.

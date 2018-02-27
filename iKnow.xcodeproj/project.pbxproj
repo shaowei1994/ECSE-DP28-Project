@@ -14,6 +14,7 @@
 		BE536E95200FA5C200E23C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE536E94200FA5C200E23C7F /* Assets.xcassets */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
 		BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */; };
+		BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9231201D7849007834BB /* SettingsViewController.swift */; };
 		BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9255201E5AE4007834BB /* PhotoViewController.swift */; };
@@ -31,6 +32,7 @@
 		BE536E97200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE536E99200FA5C200E23C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Caltech.mlmodel; sourceTree = "<group>"; };
+		BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
 		BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		BEBB9231201D7849007834BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BEBB9255201E5AE4007834BB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
 				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
+				BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */,
 				BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */,
 				BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */,
 				BE536E94200FA5C200E23C7F /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
 				BEBB925A201EF755007834BB /* Inceptionv3.mlmodel in Sources */,
+				BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
 			);
