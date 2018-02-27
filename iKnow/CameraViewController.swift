@@ -14,9 +14,9 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var cameraView: ARSKView!
-    private var currentBuffer: CVPixelBuffer?
     private let visionQueue = DispatchQueue(label: "Queue") // A Serial Queue
     private var suspended = false
+    private let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,14 +66,13 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         }
     }
     
-    func objectRecognition(){
+    private func objectRecognition(){
         guard let pixelBuffer: CVPixelBuffer = cameraView.session.currentFrame?.capturedImage else {return}
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {return}
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
             guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
             guard let firstObservation = results.first else {return}
-//            let confidence = firstObservation.confidence
             DispatchQueue.main.async {
                 self.detailLabel.text = String(firstObservation.identifier.split(separator: ",")[0])
                 print(firstObservation.identifier.split(separator: ",")[0], firstObservation.confidence)
@@ -81,10 +80,10 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         }
         // Crop input images to square area at center, matching the way the ML model was trained.
         request.imageCropAndScaleOption = .centerCrop
-        
+
         // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
         request.usesCPUOnly = true
-        try? VNImageRequestHandler(ciImage: ciImage, options: [:]).perform([request])
+        try? VNImageRequestHandler(ciImage: ciImage, orientation: orientation).perform([request])
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,10 +94,4 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     override var prefersStatusBarHidden : Bool {
         return true
     }
-    
-    //    func renderer(_ render: SCNSceneRenderer, updateAtTime time: TimeInterval){
-    //        DispatchQueue.main.async {
-    //            //add any updates to the SceneKit here.
-    //        }
-    //    }
 }
