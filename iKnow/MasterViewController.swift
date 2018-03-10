@@ -103,16 +103,12 @@ class MasterViewController: UIViewController {
     
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
-//            remove(asChildViewController: cameraViewController)
             removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
         } else {
-//            remove(asChildViewController: cameraViewController)
             removeAll(parentViewController: self)
             add(asChildViewController: photoViewController)
         }
-        
-        //Bring the buttons to the front layer everytime the mode(layer) changes
         self.view.bringSubview(toFront: segmentedControl)
         self.view.bringSubview(toFront: settingsBtn)
     }
