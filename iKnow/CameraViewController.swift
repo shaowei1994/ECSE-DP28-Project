@@ -15,9 +15,11 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var cameraView: ARSKView!
     private let visionQueue = DispatchQueue(label: "Queue") // A Serial Queue
-//    private var suspended = false
-//    private let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
     private var currentBuffer: CVPixelBuffer?
+    private var anchorLabels = [UUID: String]()
+    
+    //    private var suspended = false
+    //    private let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         
         //Set the View's delegate
         cameraView.delegate = self
-        
+
         //Set the scene to the view
         cameraView.presentScene(scene)
         cameraView.session.delegate = self
@@ -116,14 +118,46 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
         guard let bestResult = classifications.first else { return }
         guard let label = bestResult.identifier.split(separator: ",").first else { return }
-        
+        let labelString = String(label)
         DispatchQueue.main.async { [weak self] in
-            self?.detailLabel.text = String(label)
+            self?.detailLabel.text = labelString
             print(label, bestResult.confidence)
+            
+            self?.displayClassifiedLabels(labelString)
         }
     }
     
- 
+    func displayClassifiedLabels(_ label: String){
+        
+        //Set the label placing at the center of the frame
+        let xCenter = cameraView.frame.maxX/2
+        let yCenter = cameraView.frame.maxY/2
+        let centerPoint = CGPoint(x: xCenter, y: yCenter)
+        
+        //Conduct a hit test at the destinated CGPoint
+        let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
+        if let result = hitTestResults.first {
+            
+            // Add a new anchor at the tap location.
+            let anchor = ARAnchor(transform: result.worldTransform)
+            cameraView.session.add(anchor: anchor)
+            
+            // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
+            anchorLabels[anchor.identifier] = label
+        }
+    }
+    
+    func view(_ view: ARSKView, didAdd node: SKNode, for anchor: ARAnchor) {
+        
+        guard let labelText = anchorLabels[anchor.identifier] else {
+            fatalError("missing expected associated label for anchor")
+        }
+        let label = TemplateLabelNode(text: labelText)
+        node.addChild(label)
+    }
+
+    
+
 //    func loopProcess() {
 //        visionQueue.async {
 //            self.objectRecognition()
