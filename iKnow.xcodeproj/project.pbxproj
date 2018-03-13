@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A048F20575DDC009C2176 /* tradChinese.swift */; };
+		BE0A049B20577213009C2176 /* french.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049A20577213009C2176 /* french.swift */; };
+		BE0A049D2057756E009C2176 /* japanese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049C2057756E009C2176 /* japanese.swift */; };
+		BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049E205775B7009C2176 /* simpChinese.swift */; };
 		BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8B200FA5C200E23C7F /* AppDelegate.swift */; };
 		BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BE536E8D200FA5C200E23C7F /* art.scnassets */; };
 		BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8F200FA5C200E23C7F /* CameraViewController.swift */; };
 		BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E91200FA5C200E23C7F /* Main.storyboard */; };
-		BE536E95200FA5C200E23C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE536E94200FA5C200E23C7F /* Assets.xcassets */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
 		BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */; };
+		BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */; };
+		BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */; };
+		BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BEB656AC2054A807008EAE2A /* LabelScene.sks */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9231201D7849007834BB /* SettingsViewController.swift */; };
 		BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9255201E5AE4007834BB /* PhotoViewController.swift */; };
@@ -22,15 +28,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE0A048F20575DDC009C2176 /* tradChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tradChinese.swift; sourceTree = "<group>"; };
+		BE0A0494205762B4009C2176 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		BE0A049920576318009C2176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE0A049A20577213009C2176 /* french.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = french.swift; sourceTree = "<group>"; };
+		BE0A049C2057756E009C2176 /* japanese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = japanese.swift; sourceTree = "<group>"; };
+		BE0A049E205775B7009C2176 /* simpChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simpChinese.swift; sourceTree = "<group>"; };
 		BE536E88200FA5C200E23C7F /* iKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE536E8B200FA5C200E23C7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE536E8D200FA5C200E23C7F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		BE536E8F200FA5C200E23C7F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BE536E92200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BE536E94200FA5C200E23C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE536E97200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE536E99200FA5C200E23C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Caltech.mlmodel; sourceTree = "<group>"; };
+		BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
+		BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLabelNode.swift; sourceTree = "<group>"; };
+		BEB656AC2054A807008EAE2A /* LabelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabelScene.sks; sourceTree = "<group>"; };
 		BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		BEBB9231201D7849007834BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BEBB9255201E5AE4007834BB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +63,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE0A049120576260009C2176 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEBB9257201EC70A007834BB /* MasterViewController.swift */,
+				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
+				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
+				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BE0A04922057628C009C2176 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				BE0A048F20575DDC009C2176 /* tradChinese.swift */,
+				BE0A049A20577213009C2176 /* french.swift */,
+				BE0A049C2057756E009C2176 /* japanese.swift */,
+				BE0A049E205775B7009C2176 /* simpChinese.swift */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
+		BE0A0493205762A0009C2176 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BE0A0494205762B4009C2176 /* Inceptionv3.mlmodel */,
+				BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */,
+				BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BE0A0498205762F1009C2176 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */,
+				BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */,
+				BEB656AC2054A807008EAE2A /* LabelScene.sks */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
 		BE536E7F200FA5C200E23C7F = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +124,17 @@
 		BE536E8A200FA5C200E23C7F /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
-				BE536E8B200FA5C200E23C7F /* AppDelegate.swift */,
-				BE536E8D200FA5C200E23C7F /* art.scnassets */,
-				BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */,
-				BE536E91200FA5C200E23C7F /* Main.storyboard */,
-				BEBB9257201EC70A007834BB /* MasterViewController.swift */,
-				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
-				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
-				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
-				BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */,
-				BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */,
-				BE536E94200FA5C200E23C7F /* Assets.xcassets */,
-				BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */,
 				BE536E99200FA5C200E23C7F /* Info.plist */,
+				BE536E91200FA5C200E23C7F /* Main.storyboard */,
+				BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */,
+				BE536E8B200FA5C200E23C7F /* AppDelegate.swift */,
+				BE0A049120576260009C2176 /* ViewControllers */,
+				BE0A0498205762F1009C2176 /* Supports */,
+				BE0A0493205762A0009C2176 /* Models */,
+				BE0A04922057628C009C2176 /* Localizations */,
+				BE0A049920576318009C2176 /* Assets.xcassets */,
+				BE536E8D200FA5C200E23C7F /* art.scnassets */,
+				BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */,
 			);
 			path = iKnow;
 			sourceTree = "<group>";
@@ -145,8 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */,
+				BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */,
 				BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */,
-				BE536E95200FA5C200E23C7F /* Assets.xcassets in Resources */,
 				BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,12 +213,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
+				BE0A049D2057756E009C2176 /* japanese.swift in Sources */,
 				BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */,
 				BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */,
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
 				BEBB925A201EF755007834BB /* Inceptionv3.mlmodel in Sources */,
+				BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */,
+				BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */,
+				BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
+				BE0A049B20577213009C2176 /* french.swift in Sources */,
+				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +365,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HM7AG9237;
 				INFOPLIST_FILE = iKnow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dp28.iKnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -320,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HM7AG9237;
 				INFOPLIST_FILE = iKnow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dp28.iKnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
