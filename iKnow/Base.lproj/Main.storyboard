@@ -30,9 +30,6 @@
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVc-RN-MAT">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                        <connections>
-                                            <segue destination="h7h-Va-6Zq" kind="embed" id="sQO-c4-UN0"/>
-                                        </connections>
                                     </containerView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hJ-0S-6id">
                                         <rect key="frame" x="266" y="750" width="84" height="28"/>

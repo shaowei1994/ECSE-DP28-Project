@@ -19,6 +19,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     private var currentBuffer: CVPixelBuffer?
     private var anchorLabels = [UUID: String]()
     private var localizedLabel: String? = ""
+    
     var selectedLang: Int = 0 {
         didSet{
             print("THE LANGUAGE IS SET TO \(selectedLang)")
@@ -27,6 +28,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Camera View Controller Begin Process...")
         
         //Set up the SKScene to render the view
         let scene = SKScene()
@@ -117,8 +119,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         let labelString = String(label)
         DispatchQueue.main.async { [weak self] in
             print(label, bestResult.confidence)
-            var language = self?.selectedLang
-            self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
+            self?.localizedLabel = { self?.localization(for: labelString, to: (self?.selectedLang)!)}()
             if let label = self?.localizedLabel{
                 self?.detailLabel.text = label
             }else{
@@ -148,7 +149,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         }else{
             return label
         }
-        
     }
     
     func view(_ view: ARSKView, didAdd node: SKNode, for anchor: ARAnchor) {

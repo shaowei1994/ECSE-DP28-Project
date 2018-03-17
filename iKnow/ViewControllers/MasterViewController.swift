@@ -17,9 +17,8 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("Views Initialized")
         setupSegmentedControl()
-        updateView()
+//        updateView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,6 +36,15 @@ class MasterViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         self.view.addSubview(settingsBtn)
     }
+    
+    private lazy var photoViewController: PhotoViewController = {
+        // Load Storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+    
+        // Instantiate View Controller
+        var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
+        return viewController
+    }()
 
     private lazy var cameraViewController: CameraViewController = {
         // Load Storyboard
@@ -45,15 +53,6 @@ class MasterViewController: UIViewController {
         // Instantiate View Controller
         var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
         
-        return viewController
-    }()
-    
-    private lazy var photoViewController: PhotoViewController = {
-        // Load Storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-    
-        // Instantiate View Controller
-        var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
         return viewController
     }()
     
