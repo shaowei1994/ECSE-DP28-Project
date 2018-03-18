@@ -24,6 +24,7 @@
 		BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9231201D7849007834BB /* SettingsViewController.swift */; };
 		BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9255201E5AE4007834BB /* PhotoViewController.swift */; };
 		BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9257201EC70A007834BB /* MasterViewController.swift */; };
+		F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		BEBB9231201D7849007834BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BEBB9255201E5AE4007834BB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BEBB9257201EC70A007834BB /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDPostProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		BE536E8A200FA5C200E23C7F /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
+				F9EAEB84205F0E0400D4A29F /* Utility */,
 				BE536E99200FA5C200E23C7F /* Info.plist */,
 				BE536E91200FA5C200E23C7F /* Main.storyboard */,
 				BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */,
@@ -132,6 +135,14 @@
 				BE536E8D200FA5C200E23C7F /* art.scnassets */,
 			);
 			path = iKnow;
+			sourceTree = "<group>";
+		};
+		F9EAEB84205F0E0400D4A29F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +222,7 @@
 				BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				BE0A049D2057756E009C2176 /* japanese.swift in Sources */,
 				BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */,
+				F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */,
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
 				7EA06D6E205C697B005A4211 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */,
