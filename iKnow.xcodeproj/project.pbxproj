@@ -35,6 +35,7 @@
 		F9E16EDA205F426900D2D77D /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ED1205F426900D2D77D /* MLMultiArray+Image.swift */; };
 		F9E16EDD205F449C00D2D77D /* Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDB205F449C00D2D77D /* Anchors.swift */; };
 		F9E16EDE205F449C00D2D77D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDC205F449C00D2D77D /* Utility.swift */; };
+		F9E16EE02060361F00D2D77D /* SSDARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDF2060361F00D2D77D /* SSDARViewController.swift */; };
 		F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */; };
 		F9EAEB86205F294B00D4A29F /* SSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB85205F294B00D4A29F /* SSDViewController.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		F9E16ED1205F426900D2D77D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		F9E16EDB205F449C00D2D77D /* Anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchors.swift; sourceTree = "<group>"; };
 		F9E16EDC205F449C00D2D77D /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		F9E16EDF2060361F00D2D77D /* SSDARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDARViewController.swift; sourceTree = "<group>"; };
 		F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDPostProcessor.swift; sourceTree = "<group>"; };
 		F9EAEB85205F294B00D4A29F /* SSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
 				F9EAEB85205F294B00D4A29F /* SSDViewController.swift */,
+				F9E16EDF2060361F00D2D77D /* SSDARViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				F9E16ED8205F426900D2D77D /* CVPixelBuffer+Helpers.swift in Sources */,
 				BE0A049B20577213009C2176 /* french.swift in Sources */,
 				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,
+				F9E16EE02060361F00D2D77D /* SSDARViewController.swift in Sources */,
 				F9E16ED7205F426900D2D77D /* MultiArray.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
 				F9E16ED2205F426900D2D77D /* Math.swift in Sources */,
