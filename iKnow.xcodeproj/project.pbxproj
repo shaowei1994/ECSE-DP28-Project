@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7EA06D6E205C697B005A4211 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */; };
+		7EFD984D2060584E00C05789 /* coco.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EFD984B2060584E00C05789 /* coco.txt */; };
+		7EFD984E2060584E00C05789 /* allacoco.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EFD984C2060584E00C05789 /* allacoco.txt */; };
 		BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A048F20575DDC009C2176 /* tradChinese.swift */; };
 		BE0A049B20577213009C2176 /* french.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049A20577213009C2176 /* french.swift */; };
 		BE0A049D2057756E009C2176 /* japanese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049C2057756E009C2176 /* japanese.swift */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ssd_mobilenet_feature_extractor.mlmodel; sourceTree = "<group>"; };
+		7EFD984B2060584E00C05789 /* coco.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coco.txt; sourceTree = "<group>"; };
+		7EFD984C2060584E00C05789 /* allacoco.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allacoco.txt; sourceTree = "<group>"; };
 		BE0A048F20575DDC009C2176 /* tradChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tradChinese.swift; sourceTree = "<group>"; };
 		BE0A049920576318009C2176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE0A049A20577213009C2176 /* french.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = french.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 		BE0A0493205762A0009C2176 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7EFD984C2060584E00C05789 /* allacoco.txt */,
+				7EFD984B2060584E00C05789 /* coco.txt */,
 				7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */,
 			);
 			path = Models;
@@ -245,10 +251,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EFD984E2060584E00C05789 /* allacoco.txt in Resources */,
 				BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */,
 				BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */,
 				BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */,
 				BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */,
+				7EFD984D2060584E00C05789 /* coco.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
