@@ -25,6 +25,7 @@
 		BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9255201E5AE4007834BB /* PhotoViewController.swift */; };
 		BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9257201EC70A007834BB /* MasterViewController.swift */; };
 		F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */; };
+		F9EAEB86205F294B00D4A29F /* SSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB85205F294B00D4A29F /* SSDViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		BEBB9255201E5AE4007834BB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BEBB9257201EC70A007834BB /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDPostProcessor.swift; sourceTree = "<group>"; };
+		F9EAEB85205F294B00D4A29F /* SSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
+				F9EAEB85205F294B00D4A29F /* SSDViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
 				7EA06D6E205C697B005A4211 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */,
+				F9EAEB86205F294B00D4A29F /* SSDViewController.swift in Sources */,
 				BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */,
 				BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
