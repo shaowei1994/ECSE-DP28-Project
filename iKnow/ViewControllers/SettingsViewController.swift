@@ -13,7 +13,7 @@ class SettingsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let fontSize: CGFloat = 35
     
-    weak var cameraVC: CameraViewController?
+    weak var cameraVC: SSDCameraViewController?
     
     let sections: [String] = [
         "Languages",

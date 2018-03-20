@@ -31,7 +31,7 @@ class PhotoViewController: UIViewController {
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
             noPhotoSelected.text = ""
-            let model = try VNCoreMLModel(for: Caltech().model)
+            let model = try VNCoreMLModel(for: ssd_mobilenet_feature_extractor().model)
             
             let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
                 self?.processClassifications(for: request, error: error)

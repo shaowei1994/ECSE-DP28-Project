@@ -162,7 +162,6 @@ class SSDViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferD
             self.semaphore.signal()
         }
         trackingRequest.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop
-        9
         
         self.semaphore.wait()
         do {

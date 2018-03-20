@@ -37,12 +37,12 @@ class MasterViewController: UIViewController {
         self.view.addSubview(settingsBtn)
     }
 
-    private lazy var cameraViewController: CameraViewController = {
+    private lazy var cameraViewController: SSDCameraViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         // Instantiate View Controller
-        var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "SSDCameraViewController") as! SSDCameraViewController
 
         return viewController
     }()
