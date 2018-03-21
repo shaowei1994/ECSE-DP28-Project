@@ -25,7 +25,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzt-0o-Dsd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <connections>
-                                            <segue destination="vU8-ia-SD5" kind="embed" id="MKQ-vE-vyU"/>
+                                            <segue destination="XNd-Dp-ezG" kind="embed" id="8B9-9p-its"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVc-RN-MAT">
@@ -160,7 +160,6 @@
         <!--Camera View Controller-->
         <scene sceneID="JR1-Cl-SfR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SgR-Ba-mvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CameraViewController" id="XNd-Dp-ezG" customClass="CameraViewController" customModule="iKnow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Mt-5E-h1o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -178,7 +177,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5K-Ag-ipm">
-                                <rect key="frame" x="153" y="535" width="69" height="30"/>
+                                <rect key="frame" x="16" y="708" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Label"/>
                                 <connections>
@@ -186,7 +185,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-z9-JHz">
-                                <rect key="frame" x="159" y="573" width="57" height="30"/>
+                                <rect key="frame" x="22" y="760" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear All"/>
                                 <connections>
@@ -198,12 +197,13 @@
                         <viewLayoutGuide key="safeArea" id="D0S-Yg-cU1"/>
                     </view>
                     <connections>
-                        <outlet property="cameraView" destination="d0S-CD-P6r" id="0G7-1c-aJN"/>
+                        <outlet property="cameraView" destination="d0S-CD-P6r" id="tpo-cJ-4zr"/>
                         <outlet property="detailLabel" destination="O5K-lJ-0kX" id="4Gl-Xt-8yT"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SgR-Ba-mvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="858"/>
+            <point key="canvasLocation" x="-178.40000000000001" y="858.62068965517244"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="HVz-LS-DSA">
@@ -298,54 +298,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boA-8o-39g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="813.60000000000002" y="858.62068965517244"/>
-        </scene>
-        <!--SSDCameraViewController-->
-        <scene sceneID="uPm-P6-WGz">
-            <objects>
-                <viewController storyboardIdentifier="SSDCameraViewController" title="SSDCameraViewController" id="vU8-ia-SD5" customClass="SSDCameraViewController" customModule="iKnow" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bW0-fN-uSU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <arskView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nyz-QA-T1i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </arskView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yz-6W-jnq">
-                                <rect key="frame" x="0.0" y="69" width="375" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0KV-U8-IgT">
-                                <rect key="frame" x="153" y="535" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Label"/>
-                                <connections>
-                                    <action selector="addLabel:" destination="vU8-ia-SD5" eventType="touchUpInside" id="gKF-HI-Gec"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VB-F3-xm2">
-                                <rect key="frame" x="159" y="573" width="57" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Clear All"/>
-                                <connections>
-                                    <action selector="clearAllLabels:" destination="vU8-ia-SD5" eventType="touchUpInside" id="Ege-rU-fy0"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="4uO-Gw-r1z"/>
-                    </view>
-                    <connections>
-                        <outlet property="cameraView" destination="nyz-QA-T1i" id="byA-Ab-Zln"/>
-                        <outlet property="detailLabel" destination="6yz-6W-jnq" id="1Rp-Vf-lwy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ANA-LE-ifL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-450" y="859"/>
         </scene>
     </scenes>
 </document>

@@ -13,7 +13,7 @@ class SettingsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let fontSize: CGFloat = 35
     
-    weak var cameraVC: SSDCameraViewController?
+    weak var cameraVC: CameraViewController?
     
     let sections: [String] = [
         "Languages",
@@ -42,20 +42,22 @@ class SettingsViewController: UITableViewController {
             self.name = name
         }
     }
-
-    @IBAction func editButtonTapped(_ sender: UIBarButtonItem){
-        let tableViewEditingMode = tableView.isEditing
-        tableView.setEditing(!tableViewEditingMode, animated: true)
-    }
-
-    @IBAction func didSelectDoneButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = editButtonItem
         tableView.rowHeight = cellHeight
+    }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem){
+        let tableViewEditingMode = tableView.isEditing
+        tableView.setEditing(!tableViewEditingMode, animated: true)
+    }
+
+    // MARK: - Table view data source
+
+    @IBAction func didSelectDoneButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,8 +85,10 @@ class SettingsViewController: UITableViewController {
             cell.textLabel?.text = "\(about)"
             cell.isUserInteractionEnabled = false
         }
+        
         cell.textLabel?.font = UIFont(name:"Avenir", size:22)
         cell.showsReorderControl = true
+        
         return cell
     }
     

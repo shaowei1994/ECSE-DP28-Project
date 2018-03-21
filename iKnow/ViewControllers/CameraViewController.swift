@@ -70,7 +70,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     private lazy var classificationRequest: VNCoreMLRequest = {
         do {
             // Instantiate the model from its generated Swift class.
-            let model = try VNCoreMLModel(for: ssd_mobilenet_feature_extractor().model)
+            let model = try VNCoreMLModel(for: Inceptionv3().model)
             let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
                 self?.processClassifications(for: request, error: error)
             })
@@ -117,7 +117,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         let labelString = String(label)
         DispatchQueue.main.async { [weak self] in
             print(label, bestResult.confidence)
-            let language = self?.selectedLang
+            var language = self?.selectedLang
             self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
             if let label = self?.localizedLabel{
                 self?.detailLabel.text = label

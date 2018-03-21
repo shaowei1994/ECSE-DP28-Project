@@ -17,6 +17,7 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print("Views Initialized")
         setupSegmentedControl()
         updateView()
     }
@@ -37,13 +38,13 @@ class MasterViewController: UIViewController {
         self.view.addSubview(settingsBtn)
     }
 
-    private lazy var cameraViewController: SSDCameraViewController = {
+    private lazy var cameraViewController: CameraViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         // Instantiate View Controller
-        var viewController = storyboard.instantiateViewController(withIdentifier: "SSDCameraViewController") as! SSDCameraViewController
-
+        var viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+        
         return viewController
     }()
     

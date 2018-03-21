@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EA06D6B205C6542005A4211 /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = 7EA06D6A205C6541005A4211 /* Documents */; };
-		7EA06D6E205C697B005A4211 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */; };
 		BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A048F20575DDC009C2176 /* tradChinese.swift */; };
 		BE0A049B20577213009C2176 /* french.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049A20577213009C2176 /* french.swift */; };
 		BE0A049D2057756E009C2176 /* japanese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049C2057756E009C2176 /* japanese.swift */; };
@@ -18,32 +16,20 @@
 		BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8F200FA5C200E23C7F /* CameraViewController.swift */; };
 		BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E91200FA5C200E23C7F /* Main.storyboard */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
+		BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */; };
+		BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */; };
 		BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */; };
 		BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BEB656AC2054A807008EAE2A /* LabelScene.sks */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9231201D7849007834BB /* SettingsViewController.swift */; };
 		BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9255201E5AE4007834BB /* PhotoViewController.swift */; };
 		BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9257201EC70A007834BB /* MasterViewController.swift */; };
-		F9E16ED2205F426900D2D77D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EC9205F426900D2D77D /* Math.swift */; };
-		F9E16ED3205F426900D2D77D /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECA205F426900D2D77D /* UIImage+CVPixelBuffer.swift */; };
-		F9E16ED4205F426900D2D77D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECB205F426900D2D77D /* Array.swift */; };
-		F9E16ED5205F426900D2D77D /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECC205F426900D2D77D /* BoundingBox.swift */; };
-		F9E16ED6205F426900D2D77D /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECD205F426900D2D77D /* Predictions.swift */; };
-		F9E16ED7205F426900D2D77D /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECE205F426900D2D77D /* MultiArray.swift */; };
-		F9E16ED8205F426900D2D77D /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ECF205F426900D2D77D /* CVPixelBuffer+Helpers.swift */; };
-		F9E16ED9205F426900D2D77D /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ED0205F426900D2D77D /* NonMaxSuppression.swift */; };
-		F9E16EDA205F426900D2D77D /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16ED1205F426900D2D77D /* MLMultiArray+Image.swift */; };
-		F9E16EDD205F449C00D2D77D /* Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDB205F449C00D2D77D /* Anchors.swift */; };
-		F9E16EDE205F449C00D2D77D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDC205F449C00D2D77D /* Utility.swift */; };
-		F9E16EE02060361F00D2D77D /* SSDCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E16EDF2060361F00D2D77D /* SSDCameraViewController.swift */; };
-		F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */; };
-		F9EAEB86205F294B00D4A29F /* SSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAEB85205F294B00D4A29F /* SSDViewController.swift */; };
+		BEBB925A201EF755007834BB /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7EA06D6A205C6541005A4211 /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documents; path = ../../../..; sourceTree = "<group>"; };
-		7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ssd_mobilenet_feature_extractor.mlmodel; sourceTree = "<group>"; };
 		BE0A048F20575DDC009C2176 /* tradChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tradChinese.swift; sourceTree = "<group>"; };
+		BE0A0494205762B4009C2176 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		BE0A049920576318009C2176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE0A049A20577213009C2176 /* french.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = french.swift; sourceTree = "<group>"; };
 		BE0A049C2057756E009C2176 /* japanese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = japanese.swift; sourceTree = "<group>"; };
@@ -55,26 +41,15 @@
 		BE536E92200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE536E97200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE536E99200FA5C200E23C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Caltech.mlmodel; sourceTree = "<group>"; };
+		BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
 		BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLabelNode.swift; sourceTree = "<group>"; };
 		BEB656AC2054A807008EAE2A /* LabelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabelScene.sks; sourceTree = "<group>"; };
 		BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		BEBB9231201D7849007834BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BEBB9255201E5AE4007834BB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BEBB9257201EC70A007834BB /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		F9E16EC9205F426900D2D77D /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		F9E16ECA205F426900D2D77D /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
-		F9E16ECB205F426900D2D77D /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		F9E16ECC205F426900D2D77D /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
-		F9E16ECD205F426900D2D77D /* Predictions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predictions.swift; sourceTree = "<group>"; };
-		F9E16ECE205F426900D2D77D /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
-		F9E16ECF205F426900D2D77D /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
-		F9E16ED0205F426900D2D77D /* NonMaxSuppression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMaxSuppression.swift; sourceTree = "<group>"; };
-		F9E16ED1205F426900D2D77D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
-		F9E16EDB205F449C00D2D77D /* Anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchors.swift; sourceTree = "<group>"; };
-		F9E16EDC205F449C00D2D77D /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		F9E16EDF2060361F00D2D77D /* SSDCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDCameraViewController.swift; sourceTree = "<group>"; };
-		F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDPostProcessor.swift; sourceTree = "<group>"; };
-		F9EAEB85205F294B00D4A29F /* SSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDViewController.swift; sourceTree = "<group>"; };
+		BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Inceptionv3.mlmodel; path = "../../../Documents/McGill Classes/Semester 7 (2017 Fall)/ECSE 456 - Design Project I/mlmodels/Inceptionv3.mlmodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +70,6 @@
 				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
-				F9EAEB85205F294B00D4A29F /* SSDViewController.swift */,
-				F9E16EDF2060361F00D2D77D /* SSDCameraViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -115,8 +88,9 @@
 		BE0A0493205762A0009C2176 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7EA06D6D205C6977005A4211 /* ssd_mobilenet_feature_extractor.mlmodel */,
-				7EA06D6A205C6541005A4211 /* Documents */,
+				BE0A0494205762B4009C2176 /* Inceptionv3.mlmodel */,
+				BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */,
+				BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,8 +124,6 @@
 		BE536E8A200FA5C200E23C7F /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
-				F9E16EC8205F426800D2D77D /* CoreMLHelpers */,
-				F9EAEB84205F0E0400D4A29F /* Utility */,
 				BE536E99200FA5C200E23C7F /* Info.plist */,
 				BE536E91200FA5C200E23C7F /* Main.storyboard */,
 				BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */,
@@ -162,34 +134,9 @@
 				BE0A04922057628C009C2176 /* Localizations */,
 				BE0A049920576318009C2176 /* Assets.xcassets */,
 				BE536E8D200FA5C200E23C7F /* art.scnassets */,
+				BEBB9259201EF755007834BB /* Inceptionv3.mlmodel */,
 			);
 			path = iKnow;
-			sourceTree = "<group>";
-		};
-		F9E16EC8205F426800D2D77D /* CoreMLHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				F9E16EC9205F426900D2D77D /* Math.swift */,
-				F9E16ECA205F426900D2D77D /* UIImage+CVPixelBuffer.swift */,
-				F9E16ECB205F426900D2D77D /* Array.swift */,
-				F9E16ECC205F426900D2D77D /* BoundingBox.swift */,
-				F9E16ECD205F426900D2D77D /* Predictions.swift */,
-				F9E16ECE205F426900D2D77D /* MultiArray.swift */,
-				F9E16ECF205F426900D2D77D /* CVPixelBuffer+Helpers.swift */,
-				F9E16ED0205F426900D2D77D /* NonMaxSuppression.swift */,
-				F9E16ED1205F426900D2D77D /* MLMultiArray+Image.swift */,
-			);
-			path = CoreMLHelpers;
-			sourceTree = "<group>";
-		};
-		F9EAEB84205F0E0400D4A29F /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				F9EAEB82205F0DD500D4A29F /* SSDPostProcessor.swift */,
-				F9E16EDB205F449C00D2D77D /* Anchors.swift */,
-				F9E16EDC205F449C00D2D77D /* Utility.swift */,
-			);
-			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +171,6 @@
 				TargetAttributes = {
 					BE536E87200FA5C200E23C7F = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -256,7 +202,6 @@
 				BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */,
 				BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */,
 				BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */,
-				7EA06D6B205C6542005A4211 /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,29 +215,17 @@
 				BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				BE0A049D2057756E009C2176 /* japanese.swift in Sources */,
 				BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */,
-				F9E16ED5205F426900D2D77D /* BoundingBox.swift in Sources */,
-				F9E16ED9205F426900D2D77D /* NonMaxSuppression.swift in Sources */,
-				F9E16ED4205F426900D2D77D /* Array.swift in Sources */,
-				F9EAEB83205F0DD600D4A29F /* SSDPostProcessor.swift in Sources */,
+				BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */,
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
-				7EA06D6E205C697B005A4211 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */,
-				F9E16EDE205F449C00D2D77D /* Utility.swift in Sources */,
-				F9E16ED3205F426900D2D77D /* UIImage+CVPixelBuffer.swift in Sources */,
-				F9EAEB86205F294B00D4A29F /* SSDViewController.swift in Sources */,
+				BEBB925A201EF755007834BB /* Inceptionv3.mlmodel in Sources */,
 				BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */,
-				F9E16ED6205F426900D2D77D /* Predictions.swift in Sources */,
-				F9E16EDD205F449C00D2D77D /* Anchors.swift in Sources */,
-				F9E16EDA205F426900D2D77D /* MLMultiArray+Image.swift in Sources */,
 				BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */,
+				BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
-				F9E16ED8205F426900D2D77D /* CVPixelBuffer+Helpers.swift in Sources */,
 				BE0A049B20577213009C2176 /* french.swift in Sources */,
 				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,
-				F9E16EE02060361F00D2D77D /* SSDCameraViewController.swift in Sources */,
-				F9E16ED7205F426900D2D77D /* MultiArray.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
-				F9E16ED2205F426900D2D77D /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,16 +362,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5J8UJ34H98;
+				DEVELOPMENT_TEAM = 8HM7AG9237;
 				INFOPLIST_FILE = iKnow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dp28.iKnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -448,15 +378,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5J8UJ34H98;
+				DEVELOPMENT_TEAM = 8HM7AG9237;
 				INFOPLIST_FILE = iKnow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dp28.iKnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
