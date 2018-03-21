@@ -117,7 +117,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         let labelString = String(label)
         DispatchQueue.main.async { [weak self] in
             print(label, bestResult.confidence)
-            var language = self?.selectedLang
+            let language = self?.selectedLang
             self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
             if let label = self?.localizedLabel{
                 self?.detailLabel.text = label

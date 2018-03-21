@@ -125,10 +125,11 @@
                                 <action selector="didSelectDoneButton:" destination="RKu-OO-YoH" id="0Gg-fV-ocD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="plain" id="neM-D7-gyk">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="neM-D7-gyk">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fc4-Fd-6bp">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Edit"/>
                             </button>
                             <connections>
