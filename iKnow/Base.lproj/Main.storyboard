@@ -25,7 +25,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzt-0o-Dsd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <connections>
-                                            <segue destination="XNd-Dp-ezG" kind="embed" id="8B9-9p-its"/>
+                                            <segue destination="Tyb-Ie-8Kx" kind="embed" id="Ped-XT-Euh"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVc-RN-MAT">
@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgR-Ba-mvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-178.40000000000001" y="858.62068965517244"/>
+            <point key="canvasLocation" x="918" y="876"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="HVz-LS-DSA">
@@ -298,7 +298,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boA-8o-39g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813.60000000000002" y="858.62068965517244"/>
+            <point key="canvasLocation" x="1650" y="876"/>
+        </scene>
+        <!--SSDCameraViewController-->
+        <scene sceneID="U8e-Yd-Ufy">
+            <objects>
+                <viewController storyboardIdentifier="SSDCameraViewController" title="SSDCameraViewController" id="Tyb-Ie-8Kx" customClass="SSDCameraViewController" customModule="iKnow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vf6-aJ-8zc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arskView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tn2-o3-jCE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arskView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riR-4l-RZn">
+                                <rect key="frame" x="0.0" y="69" width="375" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyf-zE-mTr">
+                                <rect key="frame" x="16" y="708" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Label"/>
+                                <connections>
+                                    <action selector="addLabel:" destination="Tyb-Ie-8Kx" eventType="touchUpInside" id="BBJ-kx-HJK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfX-qz-LSC">
+                                <rect key="frame" x="22" y="760" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear All"/>
+                                <connections>
+                                    <action selector="clearAllLabels:" destination="Tyb-Ie-8Kx" eventType="touchUpInside" id="mIp-KZ-och"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="eJp-mv-e2I"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="Tn2-o3-jCE" id="88w-0C-mue"/>
+                        <outlet property="detailLabel" destination="riR-4l-RZn" id="boh-Uf-EMs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oek-NR-3n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-68" y="876"/>
         </scene>
     </scenes>
 </document>

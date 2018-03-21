@@ -16,8 +16,6 @@
 		BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8F200FA5C200E23C7F /* CameraViewController.swift */; };
 		BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E91200FA5C200E23C7F /* Main.storyboard */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
-		BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */; };
-		BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */; };
 		BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */; };
 		BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BEB656AC2054A807008EAE2A /* LabelScene.sks */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
@@ -26,6 +24,21 @@
 		BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB9257201EC70A007834BB /* MasterViewController.swift */; };
 		F9D254952061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F9D254942061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel */; };
 		F9D2549B2061FBB80051F574 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F9D2549A2061FBB80051F574 /* Inceptionv3.mlmodel */; };
+		F9D2549D2062066E0051F574 /* SSDCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D2549C2062066E0051F574 /* SSDCameraViewController.swift */; };
+		F9D254A320620A2E0051F574 /* Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D2549F20620A2E0051F574 /* Anchors.swift */; };
+		F9D254A420620A2E0051F574 /* SSDPostprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */; };
+		F9D254A520620A2E0051F574 /* coco_labels_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = F9D254A120620A2E0051F574 /* coco_labels_list.txt */; };
+		F9D254A620620A2E0051F574 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A220620A2E0051F574 /* Utility.swift */; };
+		F9D254A820620A3C0051F574 /* SSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A720620A3C0051F574 /* SSDViewController.swift */; };
+		F9D254B320620A600051F574 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AA20620A600051F574 /* Math.swift */; };
+		F9D254B420620A600051F574 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AB20620A600051F574 /* UIImage+CVPixelBuffer.swift */; };
+		F9D254B520620A600051F574 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AC20620A600051F574 /* Array.swift */; };
+		F9D254B620620A600051F574 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AD20620A600051F574 /* BoundingBox.swift */; };
+		F9D254B720620A600051F574 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AE20620A600051F574 /* Predictions.swift */; };
+		F9D254B820620A600051F574 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AF20620A600051F574 /* MultiArray.swift */; };
+		F9D254B920620A600051F574 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254B020620A600051F574 /* CVPixelBuffer+Helpers.swift */; };
+		F9D254BA20620A600051F574 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254B120620A600051F574 /* NonMaxSuppression.swift */; };
+		F9D254BB20620A600051F574 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254B220620A600051F574 /* MLMultiArray+Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +54,6 @@
 		BE536E92200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE536E97200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE536E99200FA5C200E23C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Caltech.mlmodel; sourceTree = "<group>"; };
-		BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TinyYOLO.mlmodel; sourceTree = "<group>"; };
 		BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLabelNode.swift; sourceTree = "<group>"; };
 		BEB656AC2054A807008EAE2A /* LabelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabelScene.sks; sourceTree = "<group>"; };
 		BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
@@ -51,6 +62,21 @@
 		BEBB9257201EC70A007834BB /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		F9D254942061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ssd_mobilenet_feature_extractor.mlmodel; sourceTree = "<group>"; };
 		F9D2549A2061FBB80051F574 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		F9D2549C2062066E0051F574 /* SSDCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDCameraViewController.swift; sourceTree = "<group>"; };
+		F9D2549F20620A2E0051F574 /* Anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchors.swift; sourceTree = "<group>"; };
+		F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPostprocessor.swift; sourceTree = "<group>"; };
+		F9D254A120620A2E0051F574 /* coco_labels_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coco_labels_list.txt; sourceTree = "<group>"; };
+		F9D254A220620A2E0051F574 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		F9D254A720620A3C0051F574 /* SSDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDViewController.swift; sourceTree = "<group>"; };
+		F9D254AA20620A600051F574 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		F9D254AB20620A600051F574 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
+		F9D254AC20620A600051F574 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		F9D254AD20620A600051F574 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		F9D254AE20620A600051F574 /* Predictions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predictions.swift; sourceTree = "<group>"; };
+		F9D254AF20620A600051F574 /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
+		F9D254B020620A600051F574 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		F9D254B120620A600051F574 /* NonMaxSuppression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMaxSuppression.swift; sourceTree = "<group>"; };
+		F9D254B220620A600051F574 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +97,8 @@
 				BEBB9255201E5AE4007834BB /* PhotoViewController.swift */,
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
+				F9D2549C2062066E0051F574 /* SSDCameraViewController.swift */,
+				F9D254A720620A3C0051F574 /* SSDViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -91,8 +119,6 @@
 			children = (
 				F9D254942061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel */,
 				F9D2549A2061FBB80051F574 /* Inceptionv3.mlmodel */,
-				BE536E9F20124E3B00E23C7F /* Caltech.mlmodel */,
-				BE80FA2D2044808F006E4EE4 /* TinyYOLO.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +152,9 @@
 		BE536E8A200FA5C200E23C7F /* iKnow */ = {
 			isa = PBXGroup;
 			children = (
+				F9D254A120620A2E0051F574 /* coco_labels_list.txt */,
+				F9D254A920620A600051F574 /* CoreMLHelpers */,
+				F9D2549E20620A2E0051F574 /* Utility */,
 				BE536E99200FA5C200E23C7F /* Info.plist */,
 				BE536E91200FA5C200E23C7F /* Main.storyboard */,
 				BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */,
@@ -138,6 +167,32 @@
 				BE536E8D200FA5C200E23C7F /* art.scnassets */,
 			);
 			path = iKnow;
+			sourceTree = "<group>";
+		};
+		F9D2549E20620A2E0051F574 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F9D2549F20620A2E0051F574 /* Anchors.swift */,
+				F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */,
+				F9D254A220620A2E0051F574 /* Utility.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F9D254A920620A600051F574 /* CoreMLHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				F9D254AA20620A600051F574 /* Math.swift */,
+				F9D254AB20620A600051F574 /* UIImage+CVPixelBuffer.swift */,
+				F9D254AC20620A600051F574 /* Array.swift */,
+				F9D254AD20620A600051F574 /* BoundingBox.swift */,
+				F9D254AE20620A600051F574 /* Predictions.swift */,
+				F9D254AF20620A600051F574 /* MultiArray.swift */,
+				F9D254B020620A600051F574 /* CVPixelBuffer+Helpers.swift */,
+				F9D254B120620A600051F574 /* NonMaxSuppression.swift */,
+				F9D254B220620A600051F574 /* MLMultiArray+Image.swift */,
+			);
+			path = CoreMLHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D254A520620A2E0051F574 /* coco_labels_list.txt in Resources */,
 				BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */,
 				BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */,
 				BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */,
@@ -214,20 +270,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
+				F9D254A420620A2E0051F574 /* SSDPostprocessor.swift in Sources */,
 				BE0A049D2057756E009C2176 /* japanese.swift in Sources */,
+				F9D254B620620A600051F574 /* BoundingBox.swift in Sources */,
+				F9D254A320620A2E0051F574 /* Anchors.swift in Sources */,
+				F9D2549D2062066E0051F574 /* SSDCameraViewController.swift in Sources */,
+				F9D254BA20620A600051F574 /* NonMaxSuppression.swift in Sources */,
+				F9D254B920620A600051F574 /* CVPixelBuffer+Helpers.swift in Sources */,
 				BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */,
-				BE536EA020124E3B00E23C7F /* Caltech.mlmodel in Sources */,
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
+				F9D254B420620A600051F574 /* UIImage+CVPixelBuffer.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
+				F9D254B520620A600051F574 /* Array.swift in Sources */,
 				BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */,
 				F9D254952061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */,
+				F9D254B820620A600051F574 /* MultiArray.swift in Sources */,
 				BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */,
-				BE80FA2E2044808F006E4EE4 /* TinyYOLO.mlmodel in Sources */,
 				F9D2549B2061FBB80051F574 /* Inceptionv3.mlmodel in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
 				BE0A049B20577213009C2176 /* french.swift in Sources */,
+				F9D254B320620A600051F574 /* Math.swift in Sources */,
+				F9D254B720620A600051F574 /* Predictions.swift in Sources */,
 				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,
+				F9D254A820620A3C0051F574 /* SSDViewController.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
+				F9D254A620620A2E0051F574 /* Utility.swift in Sources */,
+				F9D254BB20620A600051F574 /* MLMultiArray+Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
