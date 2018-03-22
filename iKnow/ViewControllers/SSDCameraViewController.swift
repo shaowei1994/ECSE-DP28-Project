@@ -8,6 +8,7 @@ import UIKit
 import Vision
 import ARKit
 import SpriteKit
+import Accelerate
 
 class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegate {
     
@@ -18,6 +19,17 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var currentBuffer: CVPixelBuffer?
     private var anchorLabels = [UUID: String]()
     private var localizedLabel: String? = ""
+    
+    var lastExecution = Date()
+    var screenHeight: Double?
+    var screenWidth: Double?
+    let ssdPostProcessor = SSDPostProcessor(numAnchors: 1917, numClasses: 90)
+    var visionModel:VNCoreMLModel?
+    
+    let numBoxes = 100
+    var boundingBoxes: [BoundingBox] = []
+    let multiClass = true
+    
     var selectedLang: Int = 0 {
         didSet{
             print("THE LANGUAGE IS SET TO \(selectedLang)")
@@ -37,6 +49,13 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         //Set the scene to the view
         cameraView.presentScene(scene)
         cameraView.session.delegate = self
+        
+        setupBoxes()
+        setupVision()
+        
+        screenWidth = Double(view.frame.width)
+        screenHeight = Double(view.frame.height)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +76,21 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         cameraView.session.pause()
     }
     
+    func setupBoxes() {
+        // Create shape layers for the bounding boxes.
+        for _ in 0..<numBoxes {
+            let box = BoundingBox()
+            box.addToLayer(view.layer)
+            self.boundingBoxes.append(box)
+        }
+    }
+    
+    func setupVision() {
+        guard let visionModel = try? VNCoreMLModel(for: ssd_mobilenet_feature_extractor().model)
+            else { fatalError("Can't load VisionML model") }
+        self.visionModel = visionModel
+    }
+    
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         // Do not enqueue other buffers for processing while another Vision task is still running.
         guard currentBuffer == nil, case .normal = frame.camera.trackingState else { return }
@@ -67,23 +101,23 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     
     // Vision classification request and model
     private lazy var classificationRequest: VNCoreMLRequest = {
-        do {
-            // Instantiate the model from its generated Swift class.
-            let model = try VNCoreMLModel(for: ssd_mobilenet_feature_extractor().model)
-            let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
-                self?.processClassifications(for: request, error: error)
-            })
-            
-            // Crop input images to square area at center, matching the way the ML model was trained.
-            request.imageCropAndScaleOption = .centerCrop
-            
-            // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-            request.usesCPUOnly = true
-            
-            return request
-        } catch {
-            fatalError("Failed to load Vision ML model: \(error)")
+        // Instantiate the CoreML request from model
+//        let model = self.visionModel!
+//        let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+        let trackingRequest = VNCoreMLRequest(model: self.visionModel!) { (request, error) in
+            guard let predictions = self.processClassifications(for: request, error: error) else { return }
+            DispatchQueue.main.async {
+                self.drawBoxes(predictions: predictions)
+            }
         }
+        
+        // Crop input images to square area at center, matching the way the ML model was trained.
+//        request.imageCropAndScaleOption = .centerCrop
+        
+        // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
+        trackingRequest.usesCPUOnly = true
+        
+        return trackingRequest
     }()
     
     // Run the Vision+ML classifier on the current image buffer.
@@ -102,27 +136,69 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     }
     
     // Handle completion of the Vision request and choose results to display.
-    func processClassifications(for request: VNRequest, error: Error?) {
-        guard let results = request.results else {
-            print("Unable to classify image.\n\(error!.localizedDescription)")
-            return
+    func processClassifications(for request: VNRequest, error: Error?) -> [Prediction]? {
+        let thisExecution = Date()
+        let executionTime = thisExecution.timeIntervalSince(lastExecution)
+        let framesPerSecond:Double = 1/executionTime
+        lastExecution = thisExecution
+        guard let results = request.results as? [VNCoreMLFeatureValueObservation] else {
+            return nil
         }
-        // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
-        let classifications = results as! [VNClassificationObservation]
+        guard results.count == 2 else {
+            return nil
+        }
+        guard let boxPredictions = results[1].featureValue.multiArrayValue,
+            let classPredictions = results[0].featureValue.multiArrayValue else {
+                return nil
+        }
+        DispatchQueue.main.async {
+            self.detailLabel.text = "FPS: \(framesPerSecond.format(f: ".3"))"
+        }
         
-        // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
-        guard let bestResult = classifications.first else { return }
-        guard let label = bestResult.identifier.split(separator: ",").first else { return }
-        let labelString = String(label)
-        DispatchQueue.main.async { [weak self] in
-            print(label, bestResult.confidence)
-            let language = self?.selectedLang
-            self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
-            if let label = self?.localizedLabel{
-                self?.detailLabel.text = label
-            }else{
-                self?.detailLabel.text = labelString
+        let predictions = self.ssdPostProcessor.postprocess(boxPredictions: boxPredictions, classPredictions: classPredictions)
+        return predictions
+        
+//        guard let results = request.results else {
+//            print("Unable to classify image.\n\(error!.localizedDescription)")
+//            return
+//        }
+//        // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+//        let classifications = results as! [VNClassificationObservation]
+        
+//        // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
+//        guard let bestResult = classifications.first else { return }
+//        guard let label = bestResult.identifier.split(separator: ",").first else { return }
+//        let labelString = String(label)
+//        DispatchQueue.main.async { [weak self] in
+//            print(label, bestResult.confidence)
+//            let language = self?.selectedLang
+//            self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
+//            if let label = self?.localizedLabel{
+//                self?.detailLabel.text = label
+//            }else{
+//                self?.detailLabel.text = labelString
+//            }
+//        }
+    }
+    
+    func drawBoxes(predictions: [Prediction]) {
+        
+        for (index, prediction) in predictions.enumerated() {
+            if let classNames = self.ssdPostProcessor.classNames {
+                print("Class: \(classNames[prediction.detectedClass])")
+                
+                let textColor: UIColor
+                let textLabel = String(format: "%.2f - %@", self.sigmoid(prediction.score), classNames[prediction.detectedClass])
+                
+                textColor = UIColor.black
+                let rect = prediction.finalPrediction.toCGRect(imgWidth: self.screenWidth!, imgHeight: self.screenWidth!, xOffset: 0, yOffset: (self.screenHeight! - self.screenWidth!)/2)
+                self.boundingBoxes[index].show(frame: rect,
+                                               label: textLabel,
+                                               color: UIColor.red, textColor: textColor)
             }
+        }
+        for index in predictions.count..<self.numBoxes {
+            self.boundingBoxes[index].hide()
         }
     }
     
@@ -190,14 +266,48 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     override var prefersStatusBarHidden : Bool {
         return true
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    func sigmoid(_ val:Double) -> Double {
+        return 1.0/(1.0 + exp(-val))
+    }
+    
+    func softmax(_ values:[Double]) -> [Double] {
+        if values.count == 1 { return [1.0]}
+        guard let maxValue = values.max() else {
+            fatalError("Softmax error")
+        }
+        let expValues = values.map { exp($0 - maxValue)}
+        let expSum = expValues.reduce(0, +)
+        return expValues.map({$0/expSum})
+    }
+    
+    public static func softmax2(_ x: [Double]) -> [Double] {
+        var x:[Float] = x.flatMap{Float($0)}
+        let len = vDSP_Length(x.count)
+        
+        // Find the maximum value in the input array.
+        var max: Float = 0
+        vDSP_maxv(x, 1, &max, len)
+        
+        // Subtract the maximum from all the elements in the array.
+        // Now the highest value in the array is 0.
+        max = -max
+        vDSP_vsadd(x, 1, &max, &x, 1, len)
+        
+        // Exponentiate all the elements in the array.
+        var count = Int32(x.count)
+        vvexpf(&x, x, &count)
+        
+        // Compute the sum of all exponentiated values.
+        var sum: Float = 0
+        vDSP_sve(x, 1, &sum, len)
+        
+        // Divide each element by the sum. This normalizes the array contents
+        // so that they all add up to 1.
+        vDSP_vsdiv(x, 1, &sum, &x, 1, len)
+        
+        let y:[Double] = x.flatMap{Double($0)}
+        return y
+    }
     
 }
