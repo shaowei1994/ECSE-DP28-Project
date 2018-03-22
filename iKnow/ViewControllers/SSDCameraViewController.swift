@@ -19,6 +19,9 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var currentBuffer: CVPixelBuffer?
     private var anchorLabels = [UUID: String]()
     private var localizedLabel: String? = ""
+    private var frames: Double = 0.0
+    private var ARButton: Bool = false
+
     
     var lastExecution = Date()
     var screenHeight: Double?
@@ -102,8 +105,6 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     // Vision classification request and model
     private lazy var classificationRequest: VNCoreMLRequest = {
         // Instantiate the CoreML request from model
-//        let model = self.visionModel!
-//        let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
         let trackingRequest = VNCoreMLRequest(model: self.visionModel!) { (request, error) in
             guard let predictions = self.processClassifications(for: request, error: error) else { return }
             DispatchQueue.main.async {
@@ -112,7 +113,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }
         
         // Crop input images to square area at center, matching the way the ML model was trained.
-//        request.imageCropAndScaleOption = .centerCrop
+        // request.imageCropAndScaleOption = .centerCrop
         
         // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
         trackingRequest.usesCPUOnly = true
@@ -153,50 +154,67 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }
         DispatchQueue.main.async {
             self.detailLabel.text = "FPS: \(framesPerSecond.format(f: ".3"))"
+            self.frames = framesPerSecond
         }
         
         let predictions = self.ssdPostProcessor.postprocess(boxPredictions: boxPredictions, classPredictions: classPredictions)
         return predictions
-        
-//        guard let results = request.results else {
-//            print("Unable to classify image.\n\(error!.localizedDescription)")
-//            return
-//        }
-//        // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
-//        let classifications = results as! [VNClassificationObservation]
-        
-//        // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
-//        guard let bestResult = classifications.first else { return }
-//        guard let label = bestResult.identifier.split(separator: ",").first else { return }
-//        let labelString = String(label)
-//        DispatchQueue.main.async { [weak self] in
-//            print(label, bestResult.confidence)
-//            let language = self?.selectedLang
-//            self?.localizedLabel = { self?.localization(for: labelString, to: language!)! }()
-//            if let label = self?.localizedLabel{
-//                self?.detailLabel.text = label
-//            }else{
-//                self?.detailLabel.text = labelString
-//            }
-//        }
     }
     
     func drawBoxes(predictions: [Prediction]) {
         
         for (index, prediction) in predictions.enumerated() {
             if let classNames = self.ssdPostProcessor.classNames {
-                print("Class: \(classNames[prediction.detectedClass])")
+                let label = classNames[prediction.detectedClass]
+                let score = self.sigmoid(prediction.score)
+                print("Class: \(label)")
                 
                 let textColor: UIColor
-                let textLabel = String(format: "%.2f - %@", self.sigmoid(prediction.score), classNames[prediction.detectedClass])
+                let textLabel = String(format: "%.2f - %@", score, label)
                 
                 textColor = UIColor.black
-                let rect = prediction.finalPrediction.toCGRect(imgWidth: self.screenWidth!, imgHeight: self.screenWidth!, xOffset: 0, yOffset: (self.screenHeight! - self.screenWidth!)/2)
+                let boundingBox = prediction.finalPrediction
+                
+                // draw bounding box and label
+                let rect = boundingBox.toCGRect(imgWidth: self.screenWidth!, imgHeight: self.screenWidth!, xOffset: 0, yOffset: (self.screenHeight! - self.screenWidth!)/2)
                 self.boundingBoxes[index].show(frame: rect,
                                                label: textLabel,
                                                color: UIColor.red, textColor: textColor)
+                
+                
+                
+                // addLabel button pressed
+                if self.ARButton {
+                    
+                    // localize label to selected language
+                    let language = self.selectedLang
+                    let labelOriginal = label
+                    self.localizedLabel = { self.localization(for: label, to: language)! }()
+                    if let labelLocalized = self.localizedLabel{
+                        self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelLocalized)"
+                    }else{
+                        self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelOriginal)"
+                    }
+                    
+                    // draw label in AR
+                    let xCenter = (boundingBox.xMin + boundingBox.xMax) / 2.0
+                    let yCenter = (boundingBox.yMin + boundingBox.yMax) / 2.0
+                    let centerPoint = CGPoint(x: xCenter, y: yCenter)
+                    let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
+                    if let result = hitTestResults.first {
+                        
+                        // Add a new anchor at the tap location.
+                        let anchor = ARAnchor(transform: result.worldTransform)
+                        cameraView.session.add(anchor: anchor)
+                        
+                        // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
+                        anchorLabels[anchor.identifier] = self.localizedLabel
+                    }
+                }
             }
         }
+        self.ARButton = false
+        
         for index in predictions.count..<self.numBoxes {
             self.boundingBoxes[index].hide()
         }
@@ -238,20 +256,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     }
     
     @IBAction func addLabel(_ sender: UIButton) {
-        let xCenter = cameraView.frame.maxX/2
-        let yCenter = cameraView.frame.maxY/2
-        let centerPoint = CGPoint(x: xCenter, y: yCenter)
-        
-        let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
-        if let result = hitTestResults.first {
-            
-            // Add a new anchor at the tap location.
-            let anchor = ARAnchor(transform: result.worldTransform)
-            cameraView.session.add(anchor: anchor)
-            
-            // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
-            anchorLabels[anchor.identifier] = self.localizedLabel
-        }
+        self.ARButton = true
     }
     
     @IBAction func clearAllLabels(_ sender: UIButton) {
