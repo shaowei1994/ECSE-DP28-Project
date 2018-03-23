@@ -241,14 +241,15 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }else{
             return label
         }
-        
     }
     
     func view(_ view: ARSKView, didAdd node: SKNode, for anchor: ARAnchor) {
         
         guard let labelText = anchorLabels[anchor.identifier] else {
-            fatalError("missing expected associated label for anchor")
+            print("missing expected associated label for anchor")
+            return self.restartSession()
         }
+        
         let label = TemplateLabelNode(text: labelText)
         node.addChild(label)
         label.xScale = 0.3
@@ -266,6 +267,18 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func restartSession() {
+        print("Restarting Session")
+        anchorLabels = [UUID: String]()
+        guard let cameraView = self.view as? ARSKView else {
+            return
+        }
+        let configuration = ARWorldTrackingConfiguration()
+        cameraView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+        self.detailLabel.text = "RESTARTING SESSION"
     }
     
     override var prefersStatusBarHidden : Bool {
