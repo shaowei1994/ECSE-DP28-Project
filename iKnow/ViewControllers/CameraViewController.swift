@@ -220,20 +220,23 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         self.highlightView?.center = centerPoint
 
         let originalRect = self.highlightView?.frame ?? .zero
-//        var convertedRect = self.convertToAVFoundationSpace(from: originalRect)
-        
         var testingPoint = CGPoint(x: self.highlightView!.frame.origin.x, y: self.highlightView!.frame.origin.y)
+        var convertedPt = self.cameraView.scene?.convertPoint(fromView: testingPoint)
         
-        var convertedRect1 = self.cameraView.scene?.convertPoint(fromView: testingPoint)
         print("Testing: \(testingPoint)")
-        print("Converted: \(convertedRect1)")
+        print("Converted: \(convertedPt!)")
         
-        var convertedRect2 = self.convertToAVFoundationSpace(from: originalRect)
-        print("Converted: \(convertedRect2)")
+        var convertedWidth = highlightView!.frame.size.width/self.cameraView.frame.maxX
+        var convertedHeight = highlightView!.frame.height/self.cameraView.frame.maxY
+        
+        var convertedSize = CGSize(width: convertedWidth, height: convertedHeight)
         
 //        convertedRect.origin.y = 1 - convertedRect.origin.y
-//        let newObservation = VNDetectedObjectObservation(boundingBox: convertedRect)
-//        self.lastObservation = newObservation
+        
+        var convertedBox = CGRect(origin: convertedPt!, size: convertedSize)
+        
+        let newObservation = VNDetectedObjectObservation(boundingBox: convertedBox)
+        self.lastObservation = newObservation
     }
     
     func convertToAVFoundationSpace(from uiSpace: CGRect) -> CGRect {
