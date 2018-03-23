@@ -1,7 +1,7 @@
 //
 /*  Created by Dennis Liu on 2018-03-20.
-    Copyright © 2017 Dennis Liu. All rights reserved.
-*/
+ Copyright © 2017 Dennis Liu. All rights reserved.
+ */
 //  
 
 import UIKit
@@ -19,9 +19,8 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var currentBuffer: CVPixelBuffer?
     private var anchorLabels = [UUID: String]()
     private var localizedLabel: String? = ""
-    private var frames: Double = 0.0
-    private var ARButton: Bool = false
-
+    private var frames = 0.0
+    private var ARButton = false
     
     var lastExecution = Date()
     var screenHeight: Double?
@@ -33,10 +32,13 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
     
-    var selectedLang: Int = 0 {
-        didSet{
-            print("THE LANGUAGE IS SET TO \(selectedLang)")
-        }
+    var selectedLang = 0
+    
+    var identifiedObjects = [LabelLocation]()
+    
+    struct LabelLocation{
+        var name: String
+        var location: BoundingBox2
     }
     
     override func viewDidLoad() {
@@ -56,9 +58,8 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         setupBoxes()
         setupVision()
         
-        screenWidth = Double(view.frame.width)
-        screenHeight = Double(view.frame.height)
-        
+        screenWidth = Double(self.cameraView!.frame.width)
+        screenHeight = Double(self.cameraView!.frame.height)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,57 +167,64 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         for (index, prediction) in predictions.enumerated() {
             if let classNames = self.ssdPostProcessor.classNames {
                 let label = classNames[prediction.detectedClass]
-                let score = self.sigmoid(prediction.score)
                 print("Class: \(label)")
-                
-                let textColor: UIColor
-                let textLabel = String(format: "%.2f - %@", score, label)
-                
-                textColor = UIColor.black
                 let boundingBox = prediction.finalPrediction
+
+//                let score = self.sigmoid(prediction.score)
+//                let textColor: UIColor
+//                let textLabel = String(format: "%.2f - %@", score, label)
+//                textColor = UIColor.black
+//
+//                // draw bounding box and label
+                let rect = boundingBox.toCGRect(imgWidth: self.screenWidth!,
+                                                 imgHeight: self.screenWidth!,
+                                                 xOffset: 0,
+                                                 yOffset: (self.screenHeight! - self.screenWidth!)/2)
+
+//                self.boundingBoxes[index].show(frame: rect,
+//                                               label: textLabel,
+//                                               color: UIColor.red,
+//                                               textColor: textColor)
+
+                // localize label to selected language
+                let language = self.selectedLang
+                let labelOriginal = label
+                self.localizedLabel = { self.localization(for: label, to: language)! }()
                 
-                // draw bounding box and label
-                let rect = boundingBox.toCGRect(imgWidth: self.screenWidth!, imgHeight: self.screenWidth!, xOffset: 0, yOffset: (self.screenHeight! - self.screenWidth!)/2)
-                self.boundingBoxes[index].show(frame: rect,
-                                               label: textLabel,
-                                               color: UIColor.red, textColor: textColor)
-                
-                
-                
-                // addLabel button pressed
-                if self.ARButton {
-                    
-                    // localize label to selected language
-                    let language = self.selectedLang
-                    let labelOriginal = label
-                    self.localizedLabel = { self.localization(for: label, to: language)! }()
-                    if let labelLocalized = self.localizedLabel{
-                        self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelLocalized)"
-                    }else{
-                        self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelOriginal)"
-                    }
-                    
-                    // draw label in AR
-                    let xCenter = (boundingBox.xMin + boundingBox.xMax) / 2.0
-                    let yCenter = (boundingBox.yMin + boundingBox.yMax) / 2.0
-                    let centerPoint = CGPoint(x: xCenter, y: yCenter)
-                    let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
-                    if let result = hitTestResults.first {
-                        
-                        // Add a new anchor at the tap location.
-                        let anchor = ARAnchor(transform: result.worldTransform)
-                        cameraView.session.add(anchor: anchor)
-                        
-                        // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
-                        anchorLabels[anchor.identifier] = self.localizedLabel
-                    }
+                if let labelLocalized = self.localizedLabel{
+                    self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelLocalized)"
+                }else{
+                    self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelOriginal)"
                 }
+                
+                self.tagObjectsInAR(with: rect)
+                
             }
         }
-        self.ARButton = false
         
         for index in predictions.count..<self.numBoxes {
             self.boundingBoxes[index].hide()
+        }
+    }
+    
+    func tagObjectsInAR(with boundingBox: CGRect){
+        cameraView.scene?.removeAllChildren()
+
+        let boxOrigin = boundingBox.origin
+        let xOffSet = boundingBox.width/2
+        let yOffSet = boundingBox.height/2
+        
+        let centerPoint = CGPoint(x: boxOrigin.x + xOffSet, y: boxOrigin.y + yOffSet)
+
+        let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
+        if let result = hitTestResults.first {
+            
+            // Add a new anchor at the tap location.
+            let anchor = ARAnchor(transform: result.worldTransform)
+            cameraView.session.add(anchor: anchor)
+            
+            // Track anchor ID to associate text with the anchor after ARKit creates a corresponding SKNode.
+            anchorLabels[anchor.identifier] = self.localizedLabel
         }
     }
     
