@@ -29,11 +29,14 @@ class MasterViewController: UIViewController {
     private func setupSegmentedControl() {
         // Configure Segmented Control
         segmentedControl.removeAllSegments()
-        segmentedControl.insertSegment(withTitle: "Camera", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "Photo", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Multi", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Single", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Photo", at: 2, animated: false)
+
 
         // Select First Segment
         segmentedControl.selectedSegmentIndex = 0
+        self.view.bringSubview(toFront: segmentedControl)
         self.view.addSubview(settingsBtn)
     }
     
@@ -46,6 +49,16 @@ class MasterViewController: UIViewController {
         return viewController
     }()
 
+    private lazy var SSDcameraViewController: SSDCameraViewController = {
+        // Load Storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        // Instantiate View Controller
+        var viewController = storyboard.instantiateViewController(withIdentifier: "SSDCameraViewController") as! SSDCameraViewController
+        
+        return viewController
+    }()
+    
     private lazy var cameraViewController: CameraViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -82,7 +95,9 @@ class MasterViewController: UIViewController {
     @IBAction func layerChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex{
         case 0:
-            print("Camera View Active")
+            print("Multi Camera View Active")
+        case 1:
+            print("Single Camera View Active")
         default:
             print("Photo View Active")
         }
@@ -104,6 +119,9 @@ class MasterViewController: UIViewController {
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
             removeAll(parentViewController: self)
+            add(asChildViewController: SSDcameraViewController)
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
         } else {
             removeAll(parentViewController: self)
@@ -122,7 +140,7 @@ class MasterViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController, let settingsViewController = navController.viewControllers[0] as? SettingsViewController {
-            settingsViewController.cameraVC = self.cameraViewController
+            settingsViewController.cameraVC = self.SSDcameraViewController
         }
     }
 }
