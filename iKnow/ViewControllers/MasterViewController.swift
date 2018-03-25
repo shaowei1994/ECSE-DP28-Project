@@ -11,13 +11,11 @@ import UIKit
 class MasterViewController: UIViewController {
     
     @IBOutlet weak var settingsBtn: UIButton!
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("Views Initialized")
         setupSegmentedControl()
         updateView()
     }
@@ -34,14 +32,23 @@ class MasterViewController: UIViewController {
         segmentedControl.insertSegment(withTitle: "Single", at: 1, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 2, animated: false)
 
-
         // Select First Segment
         segmentedControl.selectedSegmentIndex = 0
-        self.view.bringSubview(toFront: segmentedControl)
+        self.view.addSubview(segmentedControl)
         self.view.addSubview(settingsBtn)
     }
+    
+    private lazy var photoViewController: PhotoViewController = {
+        // Load Storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+    
+        // Instantiate View Controller
+        var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
+        
+        return viewController
+    }()
 
-    private lazy var SSDcameraViewController: SSDCameraViewController = {
+    private lazy var ssdCameraViewController: SSDCameraViewController = {
         // Load Storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -61,15 +68,6 @@ class MasterViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var photoViewController: PhotoViewController = {
-        // Load Storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-    
-        // Instantiate View Controller
-        var viewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
-        return viewController
-    }()
-    
     private func add(asChildViewController viewController: UIViewController) {
         // Add Child View Controller
         addChildViewController(viewController)
@@ -84,13 +82,12 @@ class MasterViewController: UIViewController {
     private func remove(asChildViewController viewController: UIViewController) {
         // Notify Child View Controller
         viewController.willMove(toParentViewController: nil)
-        
+
         // Remove Child View From Superview
         viewController.view.removeFromSuperview()
-        
+
         // Notify Child View Controller
         viewController.removeFromParentViewController()
-        
     }
     
     @IBAction func layerChanged(_ sender: UISegmentedControl) {
@@ -106,27 +103,34 @@ class MasterViewController: UIViewController {
     }
     
     //Remove all layers within the parent view controller
-    private func removeAll(parentViewController parentView: UIViewController){
-        if parentView.childViewControllers.count > 0{
-            let viewControllers:[UIViewController] = parentView.childViewControllers
-            for viewContoller in viewControllers{
-                viewContoller.willMove(toParentViewController: nil)
-                viewContoller.view.removeFromSuperview()
-                viewContoller.removeFromParentViewController()
-            }
-        }
-    }
+//    private func removeAll(parentViewController parentView: UIViewController){
+//        if parentView.childViewControllers.count > 0{
+//            let viewControllers:[UIViewController] = parentView.childViewControllers
+//            for viewContoller in viewControllers{
+//                viewContoller.willMove(toParentViewController: nil)
+//                viewContoller.view.removeFromSuperview()
+//                viewContoller.removeFromParentViewController()
+//            }
+//        }
+//    }
     
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {
-            removeAll(parentViewController: self)
-            add(asChildViewController: SSDcameraViewController)
+            add(asChildViewController: ssdCameraViewController)
+            remove(asChildViewController: photoViewController)
+            remove(asChildViewController: cameraViewController)
+            
+            
         } else if segmentedControl.selectedSegmentIndex == 1 {
-            removeAll(parentViewController: self)
             add(asChildViewController: cameraViewController)
+            remove(asChildViewController: photoViewController)
+            remove(asChildViewController: ssdCameraViewController)
+            
+            
         } else {
-            removeAll(parentViewController: self)
             add(asChildViewController: photoViewController)
+            remove(asChildViewController: cameraViewController)
+            remove(asChildViewController: ssdCameraViewController)
         }
         
         //Bring the buttons to the front layer everytime the mode(layer) changes
@@ -138,10 +142,9 @@ class MasterViewController: UIViewController {
         return true
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController, let settingsViewController = navController.viewControllers[0] as? SettingsViewController {
-            settingsViewController.cameraVC = self.SSDcameraViewController
+            settingsViewController.cameraVC = self.ssdCameraViewController
         }
     }
 }
