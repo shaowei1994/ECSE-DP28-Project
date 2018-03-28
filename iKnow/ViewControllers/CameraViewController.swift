@@ -44,7 +44,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Camera View Controller Begin Process...")
         
         //Set up the SKScene to render the view
         let scene = SKScene()

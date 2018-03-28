@@ -21,6 +21,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var localizedLabel: String? = ""
     private var frames = 0.0
     private var ARButton = false
+    private let tolerance: CGFloat = 30
     
     var lastExecution = Date()
     var screenHeight: Double?
@@ -28,16 +29,10 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     let ssdPostProcessor = SSDPostProcessor(numAnchors: 1917, numClasses: 90)
     var visionModel:VNCoreMLModel?
     
-    let numBoxes = 100
+    let numBoxes = 5
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
     var selectedLang = 0
-    var identifiedObjects = [LabelLocation]()
-    
-    struct LabelLocation{
-        var name: String
-        var location: BoundingBox2
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,8 +173,10 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         return predictions
     }
     
+    var lastLabel: String = ""
+    var latestLocation = CGPoint(x: 0.0, y: 0.0)
+    
     func drawBoxes(predictions: [Prediction]) {
-        
         for (index, prediction) in predictions.enumerated() {
             if let classNames = self.ssdPostProcessor.classNames {
                 let label = classNames[prediction.detectedClass]
@@ -212,7 +209,16 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 let yOffSet = rect.height/2
                 let currentPoint = CGPoint(x: boxOrigin.x + xOffSet, y: boxOrigin.y + yOffSet)
                 
-                self.tagObjectsInAR(with: rect)
+                print("Last: \(self.latestLocation)")
+                print("Current: \(currentPoint)")
+                print("Distance: \(self.SDistanceBetweenPoints(currentPoint, self.latestLocation))")
+                
+                if label != self.lastLabel ||
+                    (label == self.lastLabel && self.SDistanceBetweenPoints(currentPoint, self.latestLocation) >= self.tolerance ){
+                    self.tagObjectsInAR(with: rect)
+                    self.lastLabel = label
+                    self.latestLocation = currentPoint
+                }
             }
         }
         
