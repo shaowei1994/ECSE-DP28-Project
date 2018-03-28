@@ -16,6 +16,7 @@
 		BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8F200FA5C200E23C7F /* CameraViewController.swift */; };
 		BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E91200FA5C200E23C7F /* Main.storyboard */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
+		BE9F430420673F2B0080D982 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9F430320673F2B0080D982 /* Language.swift */; };
 		BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */; };
 		BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BEB656AC2054A807008EAE2A /* LabelScene.sks */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
@@ -29,7 +30,6 @@
 		F9D254A420620A2E0051F574 /* SSDPostprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */; };
 		F9D254A520620A2E0051F574 /* coco_labels_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = F9D254A120620A2E0051F574 /* coco_labels_list.txt */; };
 		F9D254A620620A2E0051F574 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A220620A2E0051F574 /* Utility.swift */; };
-		F9D254A820620A3C0051F574 /* SSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254A720620A3C0051F574 /* SSDViewController.swift */; };
 		F9D254B320620A600051F574 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AA20620A600051F574 /* Math.swift */; };
 		F9D254B420620A600051F574 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AB20620A600051F574 /* UIImage+CVPixelBuffer.swift */; };
 		F9D254B520620A600051F574 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D254AC20620A600051F574 /* Array.swift */; };
@@ -54,6 +54,7 @@
 		BE536E92200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE536E97200FA5C200E23C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE536E99200FA5C200E23C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE9F430320673F2B0080D982 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLabelNode.swift; sourceTree = "<group>"; };
 		BEB656AC2054A807008EAE2A /* LabelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabelScene.sks; sourceTree = "<group>"; };
 		BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPostprocessor.swift; sourceTree = "<group>"; };
 		F9D254A120620A2E0051F574 /* coco_labels_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coco_labels_list.txt; sourceTree = "<group>"; };
 		F9D254A220620A2E0051F574 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		F9D254A720620A3C0051F574 /* SSDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDViewController.swift; sourceTree = "<group>"; };
 		F9D254AA20620A600051F574 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		F9D254AB20620A600051F574 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		F9D254AC20620A600051F574 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -98,7 +98,6 @@
 				BEBB9231201D7849007834BB /* SettingsViewController.swift */,
 				BE536E8F200FA5C200E23C7F /* CameraViewController.swift */,
 				F9D2549C2062066E0051F574 /* SSDCameraViewController.swift */,
-				F9D254A720620A3C0051F574 /* SSDViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -161,6 +160,7 @@
 		F9D2549E20620A2E0051F574 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				BE9F430320673F2B0080D982 /* Language.swift */,
 				F9D2549F20620A2E0051F574 /* Anchors.swift */,
 				F9D254A020620A2E0051F574 /* SSDPostprocessor.swift */,
 				F9D254A220620A2E0051F574 /* Utility.swift */,
@@ -282,9 +282,9 @@
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
 				BE0A049B20577213009C2176 /* french.swift in Sources */,
 				F9D254B320620A600051F574 /* Math.swift in Sources */,
+				BE9F430420673F2B0080D982 /* Language.swift in Sources */,
 				F9D254B720620A600051F574 /* Predictions.swift in Sources */,
 				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,
-				F9D254A820620A3C0051F574 /* SSDViewController.swift in Sources */,
 				BEBB9256201E5AE4007834BB /* PhotoViewController.swift in Sources */,
 				F9D254A620620A2E0051F574 /* Utility.swift in Sources */,
 				F9D254BB20620A600051F574 /* MLMultiArray+Image.swift in Sources */,
