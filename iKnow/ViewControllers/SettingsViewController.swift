@@ -20,9 +20,9 @@ class SettingsViewController: UITableViewController {
         "About"
     ]
     
-    let abouts: [String]  = [
-        "Version",
-        "Build"
+    let abouts: [(String, Double)]  = [
+        ("Version", 0.5),
+        ("Build", 1)
     ]
     
     var languages: [Language] = [
@@ -68,20 +68,24 @@ class SettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
+        cell.textLabel?.font = UIFont(name:"Avenir", size:22)
         switch (indexPath.section) {
         case 0:
             let language = languages[indexPath.row]
             cell.textLabel?.text = "\(language.symbol) - \(language.name)"
+            cell.showsReorderControl = true
+            return cell
+            
         default:
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "AboutCell", for: indexPath)
             let about = abouts[indexPath.row]
-            cell.textLabel?.text = "\(about)"
+            cell.textLabel?.text = "\(about.0)"
+            cell.detailTextLabel?.text = "\(about.1)"
             cell.isUserInteractionEnabled = false
+            cell.detailTextLabel?.font = UIFont(name:"Avenir", size:22)
+            cell.showsReorderControl = true
+            return cell
         }
-        
-        cell.textLabel?.font = UIFont(name:"Avenir", size:22)
-        cell.showsReorderControl = true
-        
-        return cell
     }
     
     // Override to support rearranging the table view.
