@@ -17,6 +17,7 @@
 		BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E91200FA5C200E23C7F /* Main.storyboard */; };
 		BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE536E96200FA5C200E23C7F /* LaunchScreen.storyboard */; };
 		BE9F430420673F2B0080D982 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9F430320673F2B0080D982 /* Language.swift */; };
+		BE9F4305206B500A0080D982 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE0A049920576318009C2176 /* Assets.xcassets */; };
 		BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB656A82054A6E1008EAE2A /* TemplateLabelNode.swift */; };
 		BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BEB656AC2054A807008EAE2A /* LabelScene.sks */; };
 		BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBB922F2016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
@@ -250,6 +251,7 @@
 				BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */,
 				BEB656AD2054A807008EAE2A /* LabelScene.sks in Resources */,
 				BE536E98200FA5C200E23C7F /* LaunchScreen.storyboard in Resources */,
+				BE9F4305206B500A0080D982 /* Assets.xcassets in Resources */,
 				BE536E93200FA5C200E23C7F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
