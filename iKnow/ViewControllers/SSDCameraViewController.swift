@@ -31,9 +31,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     let numBoxes = 100
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
-    
     var selectedLang = 0
-    
     var identifiedObjects = [LabelLocation]()
     
     struct LabelLocation{
@@ -98,6 +96,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         // Do not enqueue other buffers for processing while another Vision task is still running.
         guard currentBuffer == nil, case .normal = frame.camera.trackingState else { return }
+
         // Retain the image buffer for Vision processing.
         self.currentBuffer = frame.capturedImage
         classifyCurrentFrame()
@@ -112,28 +111,45 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 self.drawBoxes(predictions: predictions)
             }
         }
-        
-        // Crop input images to square area at center, matching the way the ML model was trained.
-        // request.imageCropAndScaleOption = .centerCrop
-        
+ 
         // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-        trackingRequest.usesCPUOnly = true
+//        trackingRequest.usesCPUOnly = true
         
         return trackingRequest
     }()
     
-    // Run the Vision+ML classifier on the current image buffer.
-    private func classifyCurrentFrame() {
-        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: currentBuffer!, orientation: orientation)
-        visionQueue.async {
+    var isProcessing: Bool = false
+    
+    var nextDispatchItem: DispatchWorkItem?
+    
+    private func createWorkItem(for buffer: CVPixelBuffer) -> DispatchWorkItem {
+        return DispatchWorkItem { [unowned self] in
+            self.isProcessing = true
             do {
                 // Release the pixel buffer when done, allowing the next buffer to be processed.
                 defer { self.currentBuffer = nil }
+                let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+                let requestHandler = VNImageRequestHandler(cvPixelBuffer: buffer, orientation: orientation)
                 try requestHandler.perform([self.classificationRequest])
+                self.isProcessing = false
+                if let item = self.nextDispatchItem {
+                    self.nextDispatchItem = nil
+                    self.classifyCurrentFrame(item: item)
+                }
             } catch {
                 print("Error: Vision request failed with error \"\(error)\"")
             }
+        }
+    }
+    
+    // Run the Vision+ML classifier on the current image buffer.
+    private func classifyCurrentFrame(item: DispatchWorkItem? = nil) {
+        guard let buffer = self.currentBuffer else { return }
+        if isProcessing {
+            self.nextDispatchItem = createWorkItem(for: buffer)
+        } else {
+            let workItem = item ?? createWorkItem(for: buffer)
+            visionQueue.async(execute: workItem)
         }
     }
     
@@ -188,17 +204,15 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
 
                 // localize label to selected language
                 let language = self.selectedLang
-                let labelOriginal = label
                 self.localizedLabel = { self.localization(for: label, to: language)! }()
-                
-                if let labelLocalized = self.localizedLabel{
-                    self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelLocalized)"
-                }else{
-                    self.detailLabel.text = "FPS: \(self.frames.format(f: ".3")) \(labelOriginal)"
-                }
+                self.detailLabel.text = "FPS: \(self.frames.format(f: ".3"))"
+
+                let boxOrigin = rect.origin
+                let xOffSet = rect.width/2
+                let yOffSet = rect.height/2
+                let currentPoint = CGPoint(x: boxOrigin.x + xOffSet, y: boxOrigin.y + yOffSet)
                 
                 self.tagObjectsInAR(with: rect)
-                
             }
         }
         
@@ -207,13 +221,16 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }
     }
     
+    func SDistanceBetweenPoints(_ first: CGPoint, _ second: CGPoint) -> CGFloat {
+        return CGFloat(hypotf(Float(second.x - first.x), Float(second.y - first.y)));
+    }
+    
     func tagObjectsInAR(with boundingBox: CGRect){
         cameraView.scene?.removeAllChildren()
 
         let boxOrigin = boundingBox.origin
         let xOffSet = boundingBox.width/2
         let yOffSet = boundingBox.height/2
-        
         let centerPoint = CGPoint(x: boxOrigin.x + xOffSet, y: boxOrigin.y + yOffSet)
 
         let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
