@@ -13,7 +13,8 @@ class SettingsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let fontSize: CGFloat = 35
     
-    weak var cameraVC: SSDCameraViewController?
+    weak var cameraVC: CameraViewController?
+    weak var ssdCameraVC: SSDCameraViewController?
     
     let sections: [String] = [
         "Languages",
@@ -30,8 +31,13 @@ class SettingsViewController: UITableViewController {
         Language(symbol: "🇨🇳", name: "Simplified Chinese"),
         Language(symbol: "🇹🇼", name: "Traditional Chinese"),
         Language(symbol: "🇯🇵", name: "Japanese"),
-        Language(symbol: "🇫🇷", name: "French")
-    ]
+        Language(symbol: "🇰🇷", name: "Korean"),
+        Language(symbol: "🇫🇷", name: "French"),
+        Language(symbol: "🇩🇪", name: "German"),
+        Language(symbol: "🇮🇹", name: "Italian"),
+        Language(symbol: "🇬🇷", name: "Greek"),
+        Language(symbol: "🇪🇸", name: "Spanish"),
+]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +126,7 @@ class SettingsViewController: UITableViewController {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
             cameraVC?.selectedLang = cell.textLabel!.text!
+            ssdCameraVC?.selectedLang = cell.textLabel!.text!
         }
     }
     

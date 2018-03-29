@@ -18,6 +18,7 @@ class MasterViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         setupSegmentedControl()
         updateView()
+        UserDefaults.standard.removeObject(forKey: "LanguageSortOrder")
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,8 +29,8 @@ class MasterViewController: UIViewController {
     private func setupSegmentedControl() {
         // Configure Segmented Control
         segmentedControl.removeAllSegments()
-        segmentedControl.insertSegment(withTitle: "Multi", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "Single", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Tracking(Beta)", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Real-time", at: 1, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 2, animated: false)
 
         // Select First Segment
@@ -144,7 +145,8 @@ class MasterViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController, let settingsViewController = navController.viewControllers[0] as? SettingsViewController {
-            settingsViewController.cameraVC = self.ssdCameraViewController
+            settingsViewController.cameraVC = self.cameraViewController
+            settingsViewController.ssdCameraVC = self.ssdCameraViewController
         }
     }
 }
