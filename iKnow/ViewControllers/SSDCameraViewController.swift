@@ -34,13 +34,6 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     let multiClass = true
     var selectedLang: String = ""
     
-    var languageList : [String : [String : String]] = [
-        "🇨🇳 - Simplified Chinese"  : simpChinese,
-        "🇹🇼 - Traditional Chinese" : tradChinese,
-        "🇯🇵 - Japanese"            : japanese,
-        "🇫🇷 - French"              : french
-    ]
-    
     @IBAction func addLabel(_ sender: UIButton) {
         self.ARButton = true
     }
@@ -269,7 +262,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     
     func localization(for label: String, to language: String) -> String? {
         //change this string to the one that u obtain from the model
-        if let chosenLanguage = self.languageList[language]{
+        if let chosenLanguage = languageList[language]{
             var localizedLabel = ""
             //Split message String into words seperated by space(" ")
             let array = label.split(separator: " ")
