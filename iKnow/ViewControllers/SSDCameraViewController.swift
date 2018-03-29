@@ -32,7 +32,23 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     let numBoxes = 5
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
-    var selectedLang = 0
+    var selectedLang: String = ""
+    
+    var languageList : [String : [String : String]] = [
+        "🇨🇳 - Simplified Chinese"  : simpChinese,
+        "🇹🇼 - Traditional Chinese" : tradChinese,
+        "🇯🇵 - Japanese"            : japanese,
+        "🇫🇷 - French"              : french
+    ]
+    
+    @IBAction func addLabel(_ sender: UIButton) {
+        self.ARButton = true
+    }
+    
+    @IBAction func clearAllLabels(_ sender: UIButton) {
+        cameraView.scene?.removeAllChildren()
+        self.anchorLabels = [UUID: String]()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -251,17 +267,15 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }
     }
     
-    func localization(for label: String, to language: Int) -> String? {
+    func localization(for label: String, to language: String) -> String? {
         //change this string to the one that u obtain from the model
-        if language > 0{
-            let languageOffSet = language - 1
-            let languageList = [simpChinese, tradChinese, japanese, french]
+        if let chosenLanguage = self.languageList[language]{
             var localizedLabel = ""
             //Split message String into words seperated by space(" ")
             let array = label.split(separator: " ")
             for singleWord in array {
                 let word = String(singleWord)
-                if let encodedWord = languageList[languageOffSet][word] {
+                if let encodedWord = chosenLanguage[word] {
                     localizedLabel += encodedWord
                 } else {
                     localizedLabel += word
@@ -285,14 +299,6 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         node.addChild(label)
         label.xScale = 0.3
         label.yScale = 0.3
-    }
-    
-    @IBAction func addLabel(_ sender: UIButton) {
-        self.ARButton = true
-    }
-    
-    @IBAction func clearAllLabels(_ sender: UIButton) {
-        cameraView.scene?.removeAllChildren()
     }
     
     override func didReceiveMemoryWarning() {

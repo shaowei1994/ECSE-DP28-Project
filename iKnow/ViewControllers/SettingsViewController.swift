@@ -82,6 +82,7 @@ class SettingsViewController: UITableViewController {
             cell.textLabel?.text = "\(about.0)"
             cell.detailTextLabel?.text = "\(about.1)"
             cell.isUserInteractionEnabled = false
+            cell.textLabel?.font = UIFont(name:"Avenir", size:22)
             cell.detailTextLabel?.font = UIFont(name:"Avenir", size:22)
             cell.showsReorderControl = true
             return cell
@@ -118,9 +119,7 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
-            if let selectedCell = tableView.indexPath(for: cell) {
-                cameraVC?.selectedLang = selectedCell[1]
-            }
+            cameraVC?.selectedLang = cell.textLabel!.text!
         }
     }
     
