@@ -20,7 +20,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     private var currentBuffer: CVPixelBuffer?
     private var anchorLabels = [UUID: String]()
     private var localizedLabel: String? = ""
-    private var frames = 0.0
     private var tagObject = false
     
     var lastExecution = Date()
@@ -29,7 +28,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     let ssdPostProcessor = SSDPostProcessor(numAnchors: 1917, numClasses: 90)
     var visionModel:VNCoreMLModel?
     
-    let numBoxes = 5
+    let numBoxes = 50
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
     var selectedLang: String = ""
@@ -156,10 +155,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     
     // Handle completion of the Vision request and choose results to display.
     func processClassifications(for request: VNRequest, error: Error?) -> [Prediction]? {
-        let thisExecution = Date()
-        let executionTime = thisExecution.timeIntervalSince(lastExecution)
-        let framesPerSecond:Double = 1/executionTime
-        lastExecution = thisExecution
         guard let results = request.results as? [VNCoreMLFeatureValueObservation] else {
             return nil
         }
@@ -170,11 +165,6 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
             let classPredictions = results[0].featureValue.multiArrayValue else {
                 return nil
         }
-        DispatchQueue.main.async {
-            self.detailLabel.text = "FPS: \(framesPerSecond.format(f: ".3"))"
-            self.frames = framesPerSecond
-        }
-        
         let predictions = self.ssdPostProcessor.postprocess(boxPredictions: boxPredictions, classPredictions: classPredictions)
         return predictions
     }
@@ -198,7 +188,11 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
                 // localize label to selected language
                 let language = self.selectedLang
                 self.localizedLabel = { self.localization(for: label, to: language)! }()
-                self.detailLabel.text = "FPS: \(self.frames.format(f: ".3"))"
+                if label != ""{
+                    self.detailLabel.text = "Object Found!"
+                    print(label)
+                }
+                
                 
                 if self.tagObject == true{
                     let hitTestResults = cameraView.hitTest(centerPoint, types: [.featurePoint, .estimatedHorizontalPlane])
@@ -251,8 +245,8 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
         
         let label = TemplateLabelNode(text: labelText)
         node.addChild(label)
-        label.xScale = 0.3
-        label.yScale = 0.3
+        label.xScale = 0.5
+        label.yScale = 0.5
     }
     
     override func didReceiveMemoryWarning() {
@@ -275,11 +269,7 @@ class CameraViewController: UIViewController, ARSKViewDelegate, ARSessionDelegat
     override var prefersStatusBarHidden : Bool {
         return true
     }
-    
-    
-    
-    
-    
+
     func sigmoid(_ val:Double) -> Double {
         return 1.0/(1.0 + exp(-val))
     }

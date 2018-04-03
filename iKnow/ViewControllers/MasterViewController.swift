@@ -29,7 +29,7 @@ class MasterViewController: UIViewController {
     private func setupSegmentedControl() {
         // Configure Segmented Control
         segmentedControl.removeAllSegments()
-        segmentedControl.insertSegment(withTitle: "Tracking(Beta)", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Track(Beta)", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Real-time", at: 1, animated: false)
         segmentedControl.insertSegment(withTitle: "Photo", at: 2, animated: false)
 
@@ -102,18 +102,6 @@ class MasterViewController: UIViewController {
         }
         updateView()
     }
-    
-    //Remove all layers within the parent view controller
-//    private func removeAll(parentViewController parentView: UIViewController){
-//        if parentView.childViewControllers.count > 0{
-//            let viewControllers:[UIViewController] = parentView.childViewControllers
-//            for viewContoller in viewControllers{
-//                viewContoller.willMove(toParentViewController: nil)
-//                viewContoller.view.removeFromSuperview()
-//                viewContoller.removeFromParentViewController()
-//            }
-//        }
-//    }
     
     private func updateView() {
         if segmentedControl.selectedSegmentIndex == 0 {

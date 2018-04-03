@@ -22,7 +22,7 @@ class SettingsViewController: UITableViewController {
     ]
     
     let abouts: [(String, Double)]  = [
-        ("Version", 0.5),
+        ("Version", 1),
         ("Build", 1)
     ]
     

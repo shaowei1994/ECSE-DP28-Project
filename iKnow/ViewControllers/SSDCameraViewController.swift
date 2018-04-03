@@ -23,13 +23,13 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var ARButton = false
     private let tolerance: CGFloat = 30
     
-    var lastExecution = Date()
+//    var lastExecution = Date()
     var screenHeight: Double?
     var screenWidth: Double?
     let ssdPostProcessor = SSDPostProcessor(numAnchors: 1917, numClasses: 90)
     var visionModel:VNCoreMLModel?
     
-    let numBoxes = 5
+    let numBoxes = 50
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
     var selectedLang: String = ""
@@ -115,9 +115,6 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 self.drawBoxes(predictions: predictions)
             }
         }
- 
-        // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-//        trackingRequest.usesCPUOnly = true
         
         return trackingRequest
     }()
@@ -159,10 +156,10 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     
     // Handle completion of the Vision request and choose results to display.
     func processClassifications(for request: VNRequest, error: Error?) -> [Prediction]? {
-        let thisExecution = Date()
-        let executionTime = thisExecution.timeIntervalSince(lastExecution)
-        let framesPerSecond:Double = 1/executionTime
-        lastExecution = thisExecution
+//        let thisExecution = Date()
+//        let executionTime = thisExecution.timeIntervalSince(lastExecution)
+//        let framesPerSecond:Double = 1/executionTime
+//        lastExecution = thisExecution
         guard let results = request.results as? [VNCoreMLFeatureValueObservation] else {
             return nil
         }
@@ -173,10 +170,10 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
             let classPredictions = results[0].featureValue.multiArrayValue else {
                 return nil
         }
-        DispatchQueue.main.async {
-            self.detailLabel.text = "FPS: \(framesPerSecond.format(f: ".3"))"
-            self.frames = framesPerSecond
-        }
+//        DispatchQueue.main.async {
+//            self.detailLabel.text = "Identifying..."
+//            self.frames = framesPerSecond
+//        }
         
         let predictions = self.ssdPostProcessor.postprocess(boxPredictions: boxPredictions, classPredictions: classPredictions)
         return predictions
@@ -211,7 +208,7 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 // localize label to selected language
                 let language = self.selectedLang
                 self.localizedLabel = { self.localization(for: label, to: language)! }()
-                self.detailLabel.text = "FPS: \(self.frames.format(f: ".3"))"
+                self.detailLabel.text = ""
 
                 let boxOrigin = rect.origin
                 let xOffSet = rect.width/2
@@ -290,8 +287,8 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         
         let label = TemplateLabelNode(text: labelText)
         node.addChild(label)
-        label.xScale = 0.3
-        label.yScale = 0.3
+        label.xScale = 0.5
+        label.yScale = 0.5
     }
     
     override func didReceiveMemoryWarning() {
