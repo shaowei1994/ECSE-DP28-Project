@@ -11,6 +11,13 @@
 		BE0A049B20577213009C2176 /* french.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049A20577213009C2176 /* french.swift */; };
 		BE0A049D2057756E009C2176 /* japanese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049C2057756E009C2176 /* japanese.swift */; };
 		BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A049E205775B7009C2176 /* simpChinese.swift */; };
+		BE510C77206C6D6F0045DE4C /* languageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C76206C6D6F0045DE4C /* languageList.swift */; };
+		BE510C79206C6E8E0045DE4C /* german.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C78206C6E8E0045DE4C /* german.swift */; };
+		BE510C7B206C6F3F0045DE4C /* italian.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C7A206C6F3F0045DE4C /* italian.swift */; };
+		BE510C7D206C6F900045DE4C /* korean.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C7C206C6F900045DE4C /* korean.swift */; };
+		BE510C7F206C6FD60045DE4C /* russian.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C7E206C6FD60045DE4C /* russian.swift */; };
+		BE510C81206C70040045DE4C /* greek.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C80206C70040045DE4C /* greek.swift */; };
+		BE510C83206C70380045DE4C /* spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE510C82206C70380045DE4C /* spanish.swift */; };
 		BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8B200FA5C200E23C7F /* AppDelegate.swift */; };
 		BE536E8E200FA5C200E23C7F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BE536E8D200FA5C200E23C7F /* art.scnassets */; };
 		BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE536E8F200FA5C200E23C7F /* CameraViewController.swift */; };
@@ -48,6 +55,13 @@
 		BE0A049A20577213009C2176 /* french.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = french.swift; sourceTree = "<group>"; };
 		BE0A049C2057756E009C2176 /* japanese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = japanese.swift; sourceTree = "<group>"; };
 		BE0A049E205775B7009C2176 /* simpChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simpChinese.swift; sourceTree = "<group>"; };
+		BE510C76206C6D6F0045DE4C /* languageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = languageList.swift; sourceTree = "<group>"; };
+		BE510C78206C6E8E0045DE4C /* german.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = german.swift; sourceTree = "<group>"; };
+		BE510C7A206C6F3F0045DE4C /* italian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = italian.swift; sourceTree = "<group>"; };
+		BE510C7C206C6F900045DE4C /* korean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = korean.swift; sourceTree = "<group>"; };
+		BE510C7E206C6FD60045DE4C /* russian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = russian.swift; sourceTree = "<group>"; };
+		BE510C80206C70040045DE4C /* greek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = greek.swift; sourceTree = "<group>"; };
+		BE510C82206C70380045DE4C /* spanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spanish.swift; sourceTree = "<group>"; };
 		BE536E88200FA5C200E23C7F /* iKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE536E8B200FA5C200E23C7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE536E8D200FA5C200E23C7F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -106,10 +120,17 @@
 		BE0A04922057628C009C2176 /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
+				BE510C76206C6D6F0045DE4C /* languageList.swift */,
+				BE510C82206C70380045DE4C /* spanish.swift */,
+				BE510C80206C70040045DE4C /* greek.swift */,
+				BE510C7A206C6F3F0045DE4C /* italian.swift */,
 				BE0A048F20575DDC009C2176 /* tradChinese.swift */,
 				BE0A049A20577213009C2176 /* french.swift */,
 				BE0A049C2057756E009C2176 /* japanese.swift */,
 				BE0A049E205775B7009C2176 /* simpChinese.swift */,
+				BE510C78206C6E8E0045DE4C /* german.swift */,
+				BE510C7E206C6FD60045DE4C /* russian.swift */,
+				BE510C7C206C6F900045DE4C /* korean.swift */,
 			);
 			path = Localizations;
 			sourceTree = "<group>";
@@ -263,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE510C81206C70040045DE4C /* greek.swift in Sources */,
 				BEBB92302016433B007834BB /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				F9D254A420620A2E0051F574 /* SSDPostprocessor.swift in Sources */,
 				BE0A049D2057756E009C2176 /* japanese.swift in Sources */,
@@ -274,16 +296,22 @@
 				BE536E90200FA5C200E23C7F /* CameraViewController.swift in Sources */,
 				BEBB9232201D7849007834BB /* SettingsViewController.swift in Sources */,
 				F9D254B420620A600051F574 /* UIImage+CVPixelBuffer.swift in Sources */,
+				BE510C79206C6E8E0045DE4C /* german.swift in Sources */,
 				BE536E8C200FA5C200E23C7F /* AppDelegate.swift in Sources */,
+				BE510C7F206C6FD60045DE4C /* russian.swift in Sources */,
 				F9D254B520620A600051F574 /* Array.swift in Sources */,
 				BE0A049020575DDC009C2176 /* tradChinese.swift in Sources */,
 				F9D254952061FA9A0051F574 /* ssd_mobilenet_feature_extractor.mlmodel in Sources */,
+				BE510C7B206C6F3F0045DE4C /* italian.swift in Sources */,
 				F9D254B820620A600051F574 /* MultiArray.swift in Sources */,
+				BE510C83206C70380045DE4C /* spanish.swift in Sources */,
+				BE510C7D206C6F900045DE4C /* korean.swift in Sources */,
 				BE0A049F205775B7009C2176 /* simpChinese.swift in Sources */,
 				F9D2549B2061FBB80051F574 /* Inceptionv3.mlmodel in Sources */,
 				BEBB9258201EC70A007834BB /* MasterViewController.swift in Sources */,
 				BE0A049B20577213009C2176 /* french.swift in Sources */,
 				F9D254B320620A600051F574 /* Math.swift in Sources */,
+				BE510C77206C6D6F0045DE4C /* languageList.swift in Sources */,
 				BE9F430420673F2B0080D982 /* Language.swift in Sources */,
 				F9D254B720620A600051F574 /* Predictions.swift in Sources */,
 				BEB656A92054A6E1008EAE2A /* TemplateLabelNode.swift in Sources */,

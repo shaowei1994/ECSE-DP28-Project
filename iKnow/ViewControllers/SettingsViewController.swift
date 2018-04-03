@@ -13,7 +13,8 @@ class SettingsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let fontSize: CGFloat = 35
     
-    weak var cameraVC: SSDCameraViewController?
+    weak var cameraVC: CameraViewController?
+    weak var ssdCameraVC: SSDCameraViewController?
     
     let sections: [String] = [
         "Languages",
@@ -21,7 +22,7 @@ class SettingsViewController: UITableViewController {
     ]
     
     let abouts: [(String, Double)]  = [
-        ("Version", 0.5),
+        ("Version", 1),
         ("Build", 1)
     ]
     
@@ -30,8 +31,13 @@ class SettingsViewController: UITableViewController {
         Language(symbol: "🇨🇳", name: "Simplified Chinese"),
         Language(symbol: "🇹🇼", name: "Traditional Chinese"),
         Language(symbol: "🇯🇵", name: "Japanese"),
-        Language(symbol: "🇫🇷", name: "French")
-    ]
+        Language(symbol: "🇰🇷", name: "Korean"),
+        Language(symbol: "🇫🇷", name: "French"),
+        Language(symbol: "🇩🇪", name: "German"),
+        Language(symbol: "🇮🇹", name: "Italian"),
+        Language(symbol: "🇬🇷", name: "Greek"),
+        Language(symbol: "🇪🇸", name: "Spanish"),
+]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +88,7 @@ class SettingsViewController: UITableViewController {
             cell.textLabel?.text = "\(about.0)"
             cell.detailTextLabel?.text = "\(about.1)"
             cell.isUserInteractionEnabled = false
+            cell.textLabel?.font = UIFont(name:"Avenir", size:22)
             cell.detailTextLabel?.font = UIFont(name:"Avenir", size:22)
             cell.showsReorderControl = true
             return cell
@@ -118,9 +125,8 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
-            if let selectedCell = tableView.indexPath(for: cell) {
-                cameraVC?.selectedLang = selectedCell[1]
-            }
+            cameraVC?.selectedLang = cell.textLabel!.text!
+            ssdCameraVC?.selectedLang = cell.textLabel!.text!
         }
     }
     

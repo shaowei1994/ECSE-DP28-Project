@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D83-hb-Tmp">
-                                        <rect key="frame" x="80" y="742" width="215" height="29"/>
+                                        <rect key="frame" x="8" y="742" width="359" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="SSD"/>
@@ -35,7 +35,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hJ-0S-6id">
-                                        <rect key="frame" x="291" y="742" width="84" height="28"/>
+                                        <rect key="frame" x="291" y="12" width="84" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Settings"/>
                                         <connections>
@@ -174,7 +174,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Initializing Process..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5K-lJ-0kX">
                                 <rect key="frame" x="0.0" y="69" width="375" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -186,18 +186,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-z9-JHz">
-                                <rect key="frame" x="16" y="739" width="57" height="30"/>
+                                <rect key="frame" x="16" y="6" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear All"/>
                                 <connections>
                                     <action selector="clearAllLabels:" destination="XNd-Dp-ezG" eventType="touchUpInside" id="bYA-G5-SRu"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohf-yg-BLN">
-                                <rect key="frame" x="117" y="342" width="141" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="D0S-Yg-cU1"/>
@@ -205,7 +200,6 @@
                     <connections>
                         <outlet property="cameraView" destination="d0S-CD-P6r" id="tpo-cJ-4zr"/>
                         <outlet property="detailLabel" destination="O5K-lJ-0kX" id="4Gl-Xt-8yT"/>
-                        <outlet property="highlightView" destination="ohf-yg-BLN" id="7aB-PB-Xc2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgR-Ba-mvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,8 +223,17 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9t-YK-Ykz">
+                                <rect key="frame" x="0.0" y="54" width="375" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="a8d-YF-eZb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uuZ-Uu-UCB">
-                                <rect key="frame" x="16" y="750" width="107" height="28"/>
+                                <rect key="frame" x="16" y="698" width="107" height="28"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OzP-kE-O75">
                                     <rect key="frame" x="0.0" y="0.0" width="107" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -254,15 +257,6 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9t-YK-Ykz">
-                                <rect key="frame" x="0.0" y="54" width="375" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="a8d-YF-eZb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -273,7 +267,7 @@
                             <constraint firstItem="B0A-Ih-YjR" firstAttribute="centerX" secondItem="ib1-C7-FFA" secondAttribute="centerX" id="FKM-Fb-xSo"/>
                             <constraint firstItem="B0A-Ih-YjR" firstAttribute="centerY" secondItem="ib1-C7-FFA" secondAttribute="centerY" id="SjH-R8-pgz"/>
                             <constraint firstItem="uuZ-Uu-UCB" firstAttribute="leading" secondItem="pRd-bf-cB5" secondAttribute="leading" constant="16" id="eka-Lc-nWe"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="uuZ-Uu-UCB" secondAttribute="bottom" id="gYQ-3Q-aPQ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="uuZ-Uu-UCB" secondAttribute="bottom" constant="52" id="gYQ-3Q-aPQ"/>
                             <constraint firstItem="B0A-Ih-YjR" firstAttribute="trailing" secondItem="k9t-YK-Ykz" secondAttribute="trailing" id="kG0-gY-KJb"/>
                             <constraint firstAttribute="trailing" secondItem="B0A-Ih-YjR" secondAttribute="trailing" id="vmt-fH-Xse"/>
                             <constraint firstItem="k9t-YK-Ykz" firstAttribute="top" secondItem="pRd-bf-cB5" secondAttribute="top" constant="10" id="wNk-V9-nnb"/>
@@ -305,7 +299,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Initializing Process..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riR-4l-RZn">
                                 <rect key="frame" x="36" y="69" width="304" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -317,7 +311,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfX-qz-LSC">
-                                <rect key="frame" x="11" y="742" width="57" height="30"/>
+                                <rect key="frame" x="16" y="6" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear All"/>
                                 <connections>

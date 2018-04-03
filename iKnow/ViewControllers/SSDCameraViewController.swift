@@ -21,22 +21,26 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     private var localizedLabel: String? = ""
     private var frames = 0.0
     private var ARButton = false
+    private let tolerance: CGFloat = 30
     
-    var lastExecution = Date()
+//    var lastExecution = Date()
     var screenHeight: Double?
     var screenWidth: Double?
     let ssdPostProcessor = SSDPostProcessor(numAnchors: 1917, numClasses: 90)
     var visionModel:VNCoreMLModel?
     
-    let numBoxes = 100
+    let numBoxes = 50
     var boundingBoxes: [BoundingBox] = []
     let multiClass = true
-    var selectedLang = 0
-    var identifiedObjects = [LabelLocation]()
+    var selectedLang: String = ""
     
-    struct LabelLocation{
-        var name: String
-        var location: BoundingBox2
+    @IBAction func addLabel(_ sender: UIButton) {
+        self.ARButton = true
+    }
+    
+    @IBAction func clearAllLabels(_ sender: UIButton) {
+        cameraView.scene?.removeAllChildren()
+        self.anchorLabels = [UUID: String]()
     }
     
     override func viewDidLoad() {
@@ -111,9 +115,6 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 self.drawBoxes(predictions: predictions)
             }
         }
- 
-        // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-//        trackingRequest.usesCPUOnly = true
         
         return trackingRequest
     }()
@@ -155,10 +156,10 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
     
     // Handle completion of the Vision request and choose results to display.
     func processClassifications(for request: VNRequest, error: Error?) -> [Prediction]? {
-        let thisExecution = Date()
-        let executionTime = thisExecution.timeIntervalSince(lastExecution)
-        let framesPerSecond:Double = 1/executionTime
-        lastExecution = thisExecution
+//        let thisExecution = Date()
+//        let executionTime = thisExecution.timeIntervalSince(lastExecution)
+//        let framesPerSecond:Double = 1/executionTime
+//        lastExecution = thisExecution
         guard let results = request.results as? [VNCoreMLFeatureValueObservation] else {
             return nil
         }
@@ -169,17 +170,19 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
             let classPredictions = results[0].featureValue.multiArrayValue else {
                 return nil
         }
-        DispatchQueue.main.async {
-            self.detailLabel.text = "FPS: \(framesPerSecond.format(f: ".3"))"
-            self.frames = framesPerSecond
-        }
+//        DispatchQueue.main.async {
+//            self.detailLabel.text = "Identifying..."
+//            self.frames = framesPerSecond
+//        }
         
         let predictions = self.ssdPostProcessor.postprocess(boxPredictions: boxPredictions, classPredictions: classPredictions)
         return predictions
     }
     
+    var lastLabel: String = ""
+    var latestLocation = CGPoint(x: 0.0, y: 0.0)
+    
     func drawBoxes(predictions: [Prediction]) {
-        
         for (index, prediction) in predictions.enumerated() {
             if let classNames = self.ssdPostProcessor.classNames {
                 let label = classNames[prediction.detectedClass]
@@ -205,14 +208,23 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
                 // localize label to selected language
                 let language = self.selectedLang
                 self.localizedLabel = { self.localization(for: label, to: language)! }()
-                self.detailLabel.text = "FPS: \(self.frames.format(f: ".3"))"
+                self.detailLabel.text = ""
 
                 let boxOrigin = rect.origin
                 let xOffSet = rect.width/2
                 let yOffSet = rect.height/2
                 let currentPoint = CGPoint(x: boxOrigin.x + xOffSet, y: boxOrigin.y + yOffSet)
                 
-                self.tagObjectsInAR(with: rect)
+                print("Last: \(self.latestLocation)")
+                print("Current: \(currentPoint)")
+                print("Distance: \(self.SDistanceBetweenPoints(currentPoint, self.latestLocation))")
+                
+                if label != self.lastLabel ||
+                    (label == self.lastLabel && self.SDistanceBetweenPoints(currentPoint, self.latestLocation) >= self.tolerance ){
+                    self.tagObjectsInAR(with: rect)
+                    self.lastLabel = label
+                    self.latestLocation = currentPoint
+                }
             }
         }
         
@@ -245,17 +257,15 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         }
     }
     
-    func localization(for label: String, to language: Int) -> String? {
+    func localization(for label: String, to language: String) -> String? {
         //change this string to the one that u obtain from the model
-        if language > 0{
-            let languageOffSet = language - 1
-            let languageList = [simpChinese, tradChinese, japanese, french]
+        if let chosenLanguage = languageList[language]{
             var localizedLabel = ""
             //Split message String into words seperated by space(" ")
             let array = label.split(separator: " ")
             for singleWord in array {
                 let word = String(singleWord)
-                if let encodedWord = languageList[languageOffSet][word] {
+                if let encodedWord = chosenLanguage[word] {
                     localizedLabel += encodedWord
                 } else {
                     localizedLabel += word
@@ -277,16 +287,8 @@ class SSDCameraViewController: UIViewController, ARSKViewDelegate, ARSessionDele
         
         let label = TemplateLabelNode(text: labelText)
         node.addChild(label)
-        label.xScale = 0.3
-        label.yScale = 0.3
-    }
-    
-    @IBAction func addLabel(_ sender: UIButton) {
-        self.ARButton = true
-    }
-    
-    @IBAction func clearAllLabels(_ sender: UIButton) {
-        cameraView.scene?.removeAllChildren()
+        label.xScale = 0.5
+        label.yScale = 0.5
     }
     
     override func didReceiveMemoryWarning() {

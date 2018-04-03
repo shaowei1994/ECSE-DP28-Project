@@ -30,10 +30,10 @@ class TemplateLabelNode: SKReferenceNode {
         for case let label as SKLabelNode in parent.children {
             label.name = text
             label.text = text
+
+            label.fontSize = 30
+            label.fontName = "Helvetica-Bold"
             label.fontColor = UIColor.green
-            label.color = UIColor.red
-            label.fontSize = 50
-//            label.attributedText = 
         }
     }
 }
